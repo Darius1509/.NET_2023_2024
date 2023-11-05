@@ -9,3 +9,14 @@ C:\Users\dariu\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Applica
 C:\Users\dariu\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\refint\ECommerceApp.Application.dll
 C:\Users\dariu\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.pdb
 C:\Users\dariu\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ref\ECommerceApp.Application.dll
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\bin\Debug\net7.0\ECommerceApp.Application.deps.json
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\bin\Debug\net7.0\ECommerceApp.Application.dll
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\bin\Debug\net7.0\ECommerceApp.Application.pdb
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.AssemblyInfoInputs.cache
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.AssemblyInfo.cs
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.csproj.CoreCompileInputs.cache
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.dll
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\refint\ECommerceApp.Application.dll
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.pdb
+C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ref\ECommerceApp.Application.dll
