@@ -51,3 +51,5 @@ C:\Users\dariu\Source\Repos\Darius1509\.NET_2023_2024\ECommerceApp\Infrastructur
 C:\Users\dariu\Source\Repos\Darius1509\.NET_2023_2024\ECommerceApp\Infrastructure\obj\Debug\net7.0\ref\Infrastructure.dll
 C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\Infrastructure\bin\Debug\net7.0\ECommerceApp.Application.dll
 C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\Infrastructure\bin\Debug\net7.0\ECommerceApp.Application.pdb
+C:\Users\dariu\source\repos\Darius1509\.NET_2023_2024\ECommerceApp\Infrastructure\bin\Debug\net7.0\ECommerceApp.Application.dll
+C:\Users\dariu\source\repos\Darius1509\.NET_2023_2024\ECommerceApp\Infrastructure\bin\Debug\net7.0\ECommerceApp.Application.pdb

@@ -1,7 +1,6 @@
 ﻿using ECommerceApp.Application.Contracts;
 using ECommerceApp.Domain.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Infrastructure.Repositories
 {

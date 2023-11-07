@@ -4,13 +4,13 @@ namespace ECommerceApp.Domain.Entities
 {
     public class Product
     {
-        private Product(string productName, int productQuantity, int productPrice, Category productCategory)
+        private Product(string productName, int productQuantity, int productPrice, int productCategoryId)
         {
             ProductId = Guid.NewGuid();
             ProductName = productName;
             ProductQuantity = productQuantity;
             ProductPrice = productPrice;
-            ProductCategory = productCategory;
+            ProductCategoryId = productCategoryId;
         }
 
         public Guid ProductId { get; private set; }
@@ -18,9 +18,9 @@ namespace ECommerceApp.Domain.Entities
         public string? ProductDescription { get; private set; }
         public int ProductQuantity { get; private set; }
         public int ProductPrice {get; private set; }
-        public Category ProductCategory { get; private set; }
+        public int ProductCategoryId { get; private set; }
 
-        public static Result<Product> Create(string productName, int productQuantity, int productPrice, Category productCategory)
+        public static Result<Product> Create(string productName, int productQuantity, int productPrice, int productCategoryId)
         {
             if (string.IsNullOrEmpty(productName))
             {
@@ -34,11 +34,11 @@ namespace ECommerceApp.Domain.Entities
             {
                 return Result<Product>.Failure("Product price cannot be less than or equal to zero");
             }
-            if (productCategory == null)
+            if (productCategoryId == 0)
             {
                 return Result<Product>.Failure("Product category cannot be null");
             }
-            return Result<Product>.Success(new Product(productName, productQuantity, productPrice, productCategory));
+            return Result<Product>.Success(new Product(productName, productQuantity, productPrice, productCategoryId));
         }
 
         public void AttachDescription (string productDescription)

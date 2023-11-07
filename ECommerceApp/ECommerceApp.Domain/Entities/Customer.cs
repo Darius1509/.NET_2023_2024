@@ -4,40 +4,40 @@ namespace ECommerceApp.Domain.Entities
 {
     public class Customer
     {
-        private Customer(String name, String email, String pass)
+        private Customer(string customerName, string customerEmail, string customerPassword)
         {
             CustomerId = Guid.NewGuid();
-            CustomerName = name;
-            CustomerEmail = email;
-            CustomerPassword = pass;
+            CustomerName = customerName;
+            CustomerEmail = customerEmail;
+            CustomerPassword = customerPassword;
         }
 
         public Guid CustomerId { get; private set; }
-        public String CustomerName { get; private set; }
-        public String CustomerEmail { get; private set; }
-        public String CustomerPassword { get; private set; }
+        public string CustomerName { get; private set; } = string.Empty;
+        public string CustomerEmail { get; private set; } = string.Empty;
+        public string CustomerPassword { get; private set; } = string.Empty;
         public List<Address>? CustomerAddresses { get; private set; }
         public List<Product>? CustomerWishlist { get; private set; }
         public List<Order>? CustomerOrders { get; private set; }
 
-        public static Result<Customer> Create(String name, String email, String pass)
+        public static Result<Customer> Create(string customerName, string customerEmail, string customerPassword)
         {
-            if (String.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(customerName))
             {
                 return Result<Customer>.Failure("Customer name cannot be empty.");
             }
 
-            if (String.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(customerEmail))
             {
                 return Result<Customer>.Failure("Customer email cannot be empty.");
             }
 
-            if (String.IsNullOrWhiteSpace(pass))
+            if (string.IsNullOrWhiteSpace(customerPassword))
             {
                 return Result<Customer>.Failure("Customer password cannot be empty.");
             }
 
-            return Result<Customer>.Success(new Customer(name, email, pass));
+            return Result<Customer>.Success(new Customer(customerName, customerEmail, customerEmail));
         }
 
         public void AttachAddress(Address address)

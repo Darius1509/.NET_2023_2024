@@ -13,7 +13,7 @@ namespace Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("CONNECTION_STRING");
+            optionsBuilder.UseNpgsql("Host=ep-weathered-dream-39753345.eu-central-1.aws.neon.tech;Port=5432;Database=ecommerce_app;User Id=postgres;Password=bMU7aOW9GKZh;");
         }
     }
 }

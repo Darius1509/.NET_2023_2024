@@ -35,3 +35,7 @@ C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceAp
 C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\bin\Debug\net7.0\ECommerceApp.Domain.pdb
 C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.csproj.AssemblyReference.cache
 C:\Users\iosub\OneDrive\Documents\GitHub\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.csproj.CopyComplete
+C:\Users\dariu\source\repos\Darius1509\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\bin\Debug\net7.0\ECommerceApp.Domain.dll
+C:\Users\dariu\source\repos\Darius1509\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\bin\Debug\net7.0\ECommerceApp.Domain.pdb
+C:\Users\dariu\source\repos\Darius1509\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.csproj.AssemblyReference.cache
+C:\Users\dariu\source\repos\Darius1509\.NET_2023_2024\ECommerceApp\ECommerceApp.Application\obj\Debug\net7.0\ECommerceApp.Application.csproj.CopyComplete
