@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v7.0": {
       "ECommerceApp.Application/1.0.0": {
+        "dependencies": {
+          "ECommerceApp.Domain": "1.0.0"
+        },
         "runtime": {
           "ECommerceApp.Application.dll": {}
+        }
+      },
+      "ECommerceApp.Domain/1.0.0": {
+        "runtime": {
+          "ECommerceApp.Domain.dll": {}
         }
       }
     }
   },
   "libraries": {
     "ECommerceApp.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ECommerceApp.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
