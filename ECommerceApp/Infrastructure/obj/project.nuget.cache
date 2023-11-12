@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "EO+pfJtdu/a6uj16Fymm+m5M++i2Z8g/+ml7yDOzEZerPMmpqEYXwxQ+Ubt2ia/0qz14Nd+hXij6X9FTedCD5w==",
+  "dgSpecHash": "CglQABxadhwrlk5hgoRZ/bmpzpRBBvmAD1zXc5nAKBW8XFqW3SYHlyu14GkNNKfbU6njdut6TyPci9mcQcOk5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\dariu\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
+    "C:\\Users\\dariu\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.8.0\\fluentvalidation.dependencyinjectionextensions.11.8.0.nupkg.sha512",
     "C:\\Users\\dariu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\dariu\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\dariu\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\dariu\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\dariu\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
     "C:\\Users\\dariu\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.13\\microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj": {}
+    "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj": {
+    "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj",
+        "projectUniqueName": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj",
         "projectName": "ECommerceApp.Application",
-        "projectPath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj",
+        "projectPath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj",
         "packagesPath": "C:\\Users\\dariu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\obj\\",
+        "outputPath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dariu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {
-                "projectPath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj"
+              "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {
+                "projectPath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj"
               }
             }
           }
@@ -43,6 +43,20 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.8.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.8.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -63,14 +77,14 @@
         }
       }
     },
-    "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {
+    "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
         "projectName": "ECommerceApp.Domain",
-        "projectPath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
+        "projectPath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
         "packagesPath": "C:\\Users\\dariu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\obj\\",
+        "outputPath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dariu\\AppData\\Roaming\\NuGet\\NuGet.Config",

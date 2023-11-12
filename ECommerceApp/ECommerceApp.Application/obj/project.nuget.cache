@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "3MUiIM6YlPIFqDJRy1FO/+jfWBDFa0+P9K/VV0uSbsrCSyNnHMLztD7smphqprkpba5lpz5CYdCY+thqZJoNvg==",
+  "dgSpecHash": "dHmAr7Zkxhyo6Q1S/Ppu8n2u87i2AeCno3rtp+bxF513oRgLz01E4O6xu4tq/0dKhP7nXhNizqVMcflWlq1ySw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Application\\ECommerceApp.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dariu\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
+    "C:\\Users\\dariu\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.8.0\\fluentvalidation.dependencyinjectionextensions.11.8.0.nupkg.sha512",
+    "C:\\Users\\dariu\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\dariu\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\dariu\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

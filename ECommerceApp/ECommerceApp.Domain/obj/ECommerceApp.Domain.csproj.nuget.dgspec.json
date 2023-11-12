@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {}
+    "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {
+    "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
         "projectName": "ECommerceApp.Domain",
-        "projectPath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
+        "projectPath": "C:\\Users\\dariu\\Source\\Repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\ECommerceApp.Domain.csproj",
         "packagesPath": "C:\\Users\\dariu\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\dariu\\source\\repos\\Darius1509\\.NET_2023_2024\\ECommerceApp\\ECommerceApp.Domain\\obj\\",
         "projectStyle": "PackageReference",
