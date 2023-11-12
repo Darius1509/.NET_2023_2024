@@ -37,6 +37,12 @@ namespace Infrastructure.Repositories
             return Result<T>.Success(result);
         }
 
+        public async Task<Result<IReadOnlyList<T>>> GetAllAsync()
+        {
+            var result = await context.Set<T>().AsNoTracking().ToListAsync();
+            return Result<IReadOnlyList<T>>.Success(result);
+        }
+
         public async Task<Result<IReadOnlyList<T>>> GetPagedReponseAsync(int page, int size)
         {
             var result = await context.Set<T>().Skip(page).Take(size).AsNoTracking().ToListAsync();

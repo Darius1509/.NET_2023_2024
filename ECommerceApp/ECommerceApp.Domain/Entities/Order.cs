@@ -41,6 +41,10 @@ namespace ECommerceApp.Domain.Entities
             OrderProducts.Add(product);
         }
 
+        public void RemoveProduct(Product product)
+        {
+            OrderProducts.Remove(product);
+        }
 
         public void UpdateStatus(string status)
         {

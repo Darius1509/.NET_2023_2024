@@ -5,15 +5,14 @@ namespace Infrastructure
 {
     public class ECommerceAppContext : DbContext
     {
+        public ECommerceAppContext(DbContextOptions<ECommerceAppContext> options) : base(options) 
+        {
+        
+        }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Host=ep-weathered-dream-39753345.eu-central-1.aws.neon.tech;Port=5432;Database=ecommerce_app;User Id=postgres;Password=bMU7aOW9GKZh;");
-        }
     }
 }
