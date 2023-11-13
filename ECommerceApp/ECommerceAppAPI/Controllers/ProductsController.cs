@@ -1,4 +1,5 @@
 ﻿using ECommerceApp.Application.Features.Products.Commands.CreateProduct;
+using ECommerceApp.Application.Features.Products.Commands.DeleteProduct;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAppAPI.Controllers
@@ -11,6 +12,16 @@ namespace ECommerceAppAPI.Controllers
         {
             var result = await Mediator.Send(command);
             if(!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        public async Task<IActionResult> Delete(DeleteProductCommand command)
+        {
+            var result = await Mediator.Send(command);
+            if (!result.Success)
             {
                 return BadRequest(result);
             }
