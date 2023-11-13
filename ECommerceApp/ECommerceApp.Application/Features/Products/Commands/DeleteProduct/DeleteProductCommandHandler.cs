@@ -1,7 +1,4 @@
-﻿
-using ECommerceApp.Application.Contracts;
-using ECommerceApp.Application.Features.Products.Commands.CreateProduct;
-using ECommerceApp.Domain.Entities;
+﻿using ECommerceApp.Application.Contracts;
 using MediatR;
 
 namespace ECommerceApp.Application.Features.Products.Commands.DeleteProduct
