@@ -3,16 +3,16 @@ using MediatR;
 
 namespace ECommerceApp.Application.Features.Products.Queries.GetAll
 {
-    public class GetAllProductsHandler : IRequestHandler<GetAllProducts, List<ProductDto>>
+    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, List<ProductDto>>
     {
         private readonly IProductRepository repository;
 
-        public GetAllProductsHandler(IProductRepository repository)
+        public GetAllProductsQueryHandler(IProductRepository repository)
         {
             this.repository = repository;
         }
 
-        public async Task<List<ProductDto>> Handle(GetAllProducts request, CancellationToken cancellationToken)
+        public async Task<List<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await repository.GetAllAsync();
             var listOfProducts = new List<ProductDto>();

@@ -2,5 +2,5 @@
 
 namespace ECommerceApp.Application.Features.Products.Queries.GetAll
 {
-    public record GetAllProducts() : IRequest<List<ProductDto>>;
+    public record GetAllProductsQuery() : IRequest<List<ProductDto>>;
 }

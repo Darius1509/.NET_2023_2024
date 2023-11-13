@@ -13,7 +13,7 @@ namespace ECommerceAppAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
         {
-            var result = await Mediator.Send(new GetAllProducts());
+            var result = await Mediator.Send(new GetAllProductsQuery());
             return Ok(result);
         }
 
