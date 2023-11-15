@@ -4,7 +4,7 @@ namespace ECommerceApp.Domain.Entities
 {
     public class Order
     {
-        private Order(DateTime orderDate, string orderStatus, int orderCustomerId)
+        private Order(DateTime orderDate, string orderStatus, Guid orderCustomerId)
         {
             OrderId = Guid.NewGuid();
             OrderDate = orderDate;
@@ -16,9 +16,9 @@ namespace ECommerceApp.Domain.Entities
         public DateTime OrderDate { get; private set; }
         public string OrderStatus { get; private set; }
         public List<Product> OrderProducts { get; private set; } = new List<Product>();
-        public int OrderCustomerId { get; private set; }
+        public Guid OrderCustomerId { get; private set; }
 
-        public static Result<Order> Create(DateTime orderDate, string orderStatus, int orderCustomerId)
+        public static Result<Order> Create(DateTime orderDate, string orderStatus, Guid orderCustomerId)
         {
             if (orderDate == DateTime.MinValue)
             {
@@ -28,7 +28,7 @@ namespace ECommerceApp.Domain.Entities
             {
                 return Result<Order>.Failure("Order status cannot be empty");
             }
-            if (orderCustomerId == 0)
+            if (orderCustomerId == Guid.Empty)
             {
                 return Result<Order>.Failure("Order customer cannot be null");
             }
