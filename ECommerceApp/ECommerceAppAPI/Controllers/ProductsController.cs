@@ -4,6 +4,7 @@ using ECommerceApp.Application.Features.Products.Queries.GetById;
 using ECommerceApp.Application.Features.Products.Queries.GetAll;
 
 using Microsoft.AspNetCore.Mvc;
+using ECommerceApp.Application.Features.Products.Commands.UpdateProduct;
 
 namespace ECommerceAppAPI.Controllers
 {
@@ -46,6 +47,22 @@ namespace ECommerceAppAPI.Controllers
         public async Task<IActionResult> Get(Guid id)
         {
             var result = await Mediator.Send(new GetByIdProduct(id));
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Update(Guid id, UpdateProductCommand command)
+        {
+            if(id != command.productId)
+            {
+                return BadRequest();
+            }
+            var result = await Mediator.Send(command);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
             return Ok(result);
         }
     }

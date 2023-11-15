@@ -40,6 +40,39 @@ namespace ECommerceApp.Domain.Entities
             }
             return Result<Product>.Success(new Product(productName, productQuantity, productPrice, productCategoryId));
         }
+        public static Result<Product> Update(Guid productId, string productName, int productQuantity, int productPrice, int productCategoryId)
+        {
+            if(productId == Guid.Empty)
+            {
+                return Result<Product>.Failure("Product Id cannot be empty");
+            }
+            if (string.IsNullOrEmpty(productName))
+            {
+                return Result<Product>.Failure("Product name cannot be empty");
+            }
+            if (productQuantity <= 0)
+            {
+                return Result<Product>.Failure("Product quantity cannot be less than or equal to zero");
+            }
+            if (productPrice <= 0)
+            {
+                return Result<Product>.Failure("Product price cannot be less than or equal to zero");
+            }
+            if (productCategoryId == 0)
+            {
+                return Result<Product>.Failure("Product category cannot be null");
+            }
+
+            var product = new Product(productName, productQuantity, productPrice, productCategoryId);
+
+            product.ProductId = productId;
+            product.ProductName = productName;
+            product.ProductQuantity = productQuantity;
+            product.ProductPrice = productPrice;
+            product.ProductCategoryId = productCategoryId;
+
+            return Result<Product>.Success(product);
+        }
 
         public void AttachDescription (string productDescription)
         {
