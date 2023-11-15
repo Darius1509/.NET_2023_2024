@@ -4,7 +4,7 @@ namespace ECommerceApp.Domain.Entities
 {
     public class Product
     {
-        private Product(string productName, int productQuantity, int productPrice, int productCategoryId)
+        private Product(string productName, int productQuantity, int productPrice, Guid productCategoryId)
         {
             ProductId = Guid.NewGuid();
             ProductName = productName;
@@ -18,65 +18,54 @@ namespace ECommerceApp.Domain.Entities
         public string? ProductDescription { get; private set; }
         public int ProductQuantity { get; private set; }
         public int ProductPrice {get; private set; }
-        public int ProductCategoryId { get; private set; }
+        public Guid ProductCategoryId { get; private set; }
 
-        public static Result<Product> Create(string productName, int productQuantity, int productPrice, int productCategoryId)
+        public void AttachDescription(string productDescription)
         {
-            if (string.IsNullOrEmpty(productName))
-            {
-                return Result<Product>.Failure("Product name cannot be empty");
-            }
-            if (productQuantity <= 0)
-            {
-                return Result<Product>.Failure("Product quantity cannot be less than or equal to zero");
-            }
-            if (productPrice <= 0)
-            {
-                return Result<Product>.Failure("Product price cannot be less than or equal to zero");
-            }
-            if (productCategoryId == 0)
-            {
-                return Result<Product>.Failure("Product category cannot be null");
-            }
+            ProductDescription = productDescription;
+        }
+
+        public static Result<Product> Create(string productName, int productQuantity, int productPrice, Guid productCategoryId)
+        {
+            var validation = ValidateParameters(productName, productQuantity, productPrice, productCategoryId);
+            if(validation != null) { return validation; }
+
             return Result<Product>.Success(new Product(productName, productQuantity, productPrice, productCategoryId));
         }
-        public static Result<Product> Update(Guid productId, string productName, int productQuantity, int productPrice, int productCategoryId)
+        public static Result<Product> Update(Guid productId, string productName, int productQuantity, int productPrice, Guid productCategoryId)
         {
-            if(productId == Guid.Empty)
-            {
-                return Result<Product>.Failure("Product Id cannot be empty");
-            }
-            if (string.IsNullOrEmpty(productName))
-            {
-                return Result<Product>.Failure("Product name cannot be empty");
-            }
-            if (productQuantity <= 0)
-            {
-                return Result<Product>.Failure("Product quantity cannot be less than or equal to zero");
-            }
-            if (productPrice <= 0)
-            {
-                return Result<Product>.Failure("Product price cannot be less than or equal to zero");
-            }
-            if (productCategoryId == 0)
-            {
-                return Result<Product>.Failure("Product category cannot be null");
-            }
+            if(productId == Guid.Empty) { return Result<Product>.Failure("Product Id cannot be empty"); }
 
-            var product = new Product(productName, productQuantity, productPrice, productCategoryId);
+            var validation = ValidateParameters(productName, productQuantity, productPrice, productCategoryId);
+            if (validation != null) { return validation; }
 
-            product.ProductId = productId;
-            product.ProductName = productName;
-            product.ProductQuantity = productQuantity;
-            product.ProductPrice = productPrice;
-            product.ProductCategoryId = productCategoryId;
+            var product = new Product(productName, productQuantity, productPrice, productCategoryId)
+            {
+                ProductId = productId
+            };
 
             return Result<Product>.Success(product);
         }
 
-        public void AttachDescription (string productDescription)
+        private static Result<Product>? ValidateParameters(string productName, int productQuantity, int productPrice, Guid productCategoryId)
         {
-            ProductDescription = productDescription;
+            if (string.IsNullOrEmpty(productName))
+            {
+                return Result<Product>.Failure("Product name cannot be empty");
+            }
+            if (productQuantity <= 0)
+            {
+                return Result<Product>.Failure("Product quantity cannot be less than or equal to zero");
+            }
+            if (productPrice <= 0)
+            {
+                return Result<Product>.Failure("Product price cannot be less than or equal to zero");
+            }
+            if (productCategoryId == Guid.Empty)
+            {
+                return Result<Product>.Failure("Product category cannot be null");
+            }
+            return null;
         }
     }
 }
