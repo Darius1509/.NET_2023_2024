@@ -100,8 +100,8 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("OrderCustomerId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("OrderCustomerId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("timestamp with time zone");
@@ -132,8 +132,8 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("ProductCategoryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("ProductCategoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ProductDescription")
                         .HasColumnType("text");

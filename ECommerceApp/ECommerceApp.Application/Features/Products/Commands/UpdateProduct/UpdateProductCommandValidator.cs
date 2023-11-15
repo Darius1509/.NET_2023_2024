@@ -23,9 +23,7 @@ namespace ECommerceApp.Application.Features.Products.Commands.UpdateProduct
                 .NotNull()
                 .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0.");
             RuleFor(p => p.ProductCategoryId)
-                .NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull()
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0.");
+                .NotEmpty().WithMessage("{PropertyName} is required.");
         }
     }
 }

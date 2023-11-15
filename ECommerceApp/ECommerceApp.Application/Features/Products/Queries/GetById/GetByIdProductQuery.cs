@@ -2,5 +2,5 @@
 
 namespace ECommerceApp.Application.Features.Products.Queries.GetById
 {
-    public record GetByIdProduct(Guid Id) : IRequest<ProductDto>;
+    public record GetByIdProductQuery(Guid Id) : IRequest<ProductDto>;
 }

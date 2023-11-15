@@ -46,7 +46,7 @@ namespace ECommerceAppAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(Guid id)
         {
-            var result = await Mediator.Send(new GetByIdProduct(id));
+            var result = await Mediator.Send(new GetByIdProductQuery(id));
             return Ok(result);
         }
 

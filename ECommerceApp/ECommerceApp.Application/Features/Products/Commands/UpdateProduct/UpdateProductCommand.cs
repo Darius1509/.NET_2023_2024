@@ -9,6 +9,6 @@ namespace ECommerceApp.Application.Features.Products.Commands.UpdateProduct
         public string ProductDescription { get; set; } = string.Empty;
         public int ProductQuantity { get; set; }
         public int ProductPrice { get; set; }
-        public int ProductCategoryId { get; set; }
+        public Guid ProductCategoryId { get; set; }
     }
 }

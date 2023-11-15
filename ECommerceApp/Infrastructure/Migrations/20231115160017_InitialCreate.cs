@@ -65,7 +65,7 @@ namespace Infrastructure.Migrations
                     OrderId = table.Column<Guid>(type: "uuid", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     OrderStatus = table.Column<string>(type: "text", nullable: false),
-                    OrderCustomerId = table.Column<int>(type: "integer", nullable: false),
+                    OrderCustomerId = table.Column<Guid>(type: "uuid", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
@@ -87,7 +87,7 @@ namespace Infrastructure.Migrations
                     ProductDescription = table.Column<string>(type: "text", nullable: true),
                     ProductQuantity = table.Column<int>(type: "integer", nullable: false),
                     ProductPrice = table.Column<int>(type: "integer", nullable: false),
-                    ProductCategoryId = table.Column<int>(type: "integer", nullable: false),
+                    ProductCategoryId = table.Column<Guid>(type: "uuid", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uuid", nullable: true),
                     CustomerId = table.Column<Guid>(type: "uuid", nullable: true),
                     OrderId = table.Column<Guid>(type: "uuid", nullable: true)
