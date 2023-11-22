@@ -31,7 +31,7 @@ namespace ECommerceAppAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(DeleteProductCommand command)
         {
             var result = await Mediator.Send(command);
@@ -51,7 +51,7 @@ namespace ECommerceAppAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
         public async Task<IActionResult> Update(Guid id, UpdateProductCommand command)
         {
             if(id != command.productId)
