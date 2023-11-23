@@ -18,6 +18,14 @@ namespace ECommerceAppAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var result = await Mediator.Send(new GetByIdProductQuery(id));
+            return Ok(result);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Create(CreateProductCommand command)
@@ -42,22 +50,10 @@ namespace ECommerceAppAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            var result = await Mediator.Send(new GetByIdProductQuery(id));
-            return Ok(result);
-        }
-
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
-        public async Task<IActionResult> Update(Guid id, UpdateProductCommand command)
+        public async Task<IActionResult> Update(UpdateProductCommand command)
         {
-            if(id != command.productId)
-            {
-                return BadRequest();
-            }
             var result = await Mediator.Send(command);
             if (!result.Success)
             {
