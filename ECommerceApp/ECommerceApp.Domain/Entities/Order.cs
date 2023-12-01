@@ -38,16 +38,19 @@ namespace ECommerceApp.Domain.Entities
 
         public void AttachProduct(Product product)
         {
+            if (OrderProducts == null) { OrderProducts = new List<Product>(); }
             OrderProducts.Add(product);
         }
 
         public void RemoveProduct(Product product)
         {
+            if (OrderProducts == null) { OrderProducts = new List<Product>(); }
             OrderProducts.Remove(product);
         }
 
         public void UpdateStatus(string status)
         {
+            if (OrderStatus == null) { OrderStatus = string.Empty;}
             OrderStatus = status;
         }
     }
