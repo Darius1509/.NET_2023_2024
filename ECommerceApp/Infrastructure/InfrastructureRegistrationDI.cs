@@ -25,6 +25,8 @@ namespace Infrastructure
                 (typeof(IAsyncRepository<>),
                 typeof(BaseRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
+
             return services;
         }
     }
