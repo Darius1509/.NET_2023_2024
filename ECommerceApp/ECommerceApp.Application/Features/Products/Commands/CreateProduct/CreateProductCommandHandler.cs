@@ -1,4 +1,4 @@
-﻿using ECommerceApp.Application.Contracts;
+﻿using ECommerceApp.Application.Persistence;
 using ECommerceApp.Domain.Entities;
 using MediatR;
 

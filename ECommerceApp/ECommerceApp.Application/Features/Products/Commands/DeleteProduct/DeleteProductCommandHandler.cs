@@ -1,4 +1,4 @@
-﻿using ECommerceApp.Application.Contracts;
+﻿using ECommerceApp.Application.Persistence;
 using MediatR;
 
 namespace ECommerceApp.Application.Features.Products.Commands.DeleteProduct
