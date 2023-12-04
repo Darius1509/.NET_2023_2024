@@ -1,12 +1,17 @@
 using ECommerceApp.Application;
+using ECommerceApp.Application.Contracts.Interfaces;
+using ECommerceAppAPI.Services;
 using ECommerceAppAPI.Utility;
+using Identity;
 using Infrastructure;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 // Add services to the container.
 builder.Services.AddInfrastructureToDI(builder.Configuration);
+builder.Services.AddInfrastructureIdentityToDI(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
