@@ -1,6 +1,6 @@
 ﻿using ECommerceApp.Domain.Common;
 
-namespace ECommerceApp.Application.Contracts
+namespace ECommerceApp.Application.Persistence
 {
     public interface IAsyncRepository<T> where T : class
     {

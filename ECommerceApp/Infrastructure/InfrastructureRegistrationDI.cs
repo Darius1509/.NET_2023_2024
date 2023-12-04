@@ -1,4 +1,4 @@
-﻿using ECommerceApp.Application.Contracts;
+﻿using ECommerceApp.Application.Persistence;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +16,7 @@ namespace Infrastructure
                 options =>
                 options.UseNpgsql(
                     configuration.GetConnectionString
-                    ("ECommerceAppConnection"),
+                    ("ECommerceAppUserConnection"),
                     builder =>
                     builder.MigrationsAssembly(
                         typeof(ECommerceAppContext)
@@ -26,7 +26,9 @@ namespace Infrastructure
                 typeof(BaseRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
-
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             return services;
         }
     }
