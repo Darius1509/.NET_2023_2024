@@ -21,7 +21,7 @@ namespace Identity
                 options => 
                 options.UseNpgsql(
                     configuration.GetConnectionString
-                    ("ECommerceUserConnection"),
+                    ("UserDbString"),
                     builder =>
                     builder.MigrationsAssembly(
                         typeof(ApplicationDbContext)

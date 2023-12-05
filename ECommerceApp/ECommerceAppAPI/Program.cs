@@ -51,7 +51,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "GloboTicket Ticket Management API",
+        Title = "EcommerceApp Management API",
 
     });
 
