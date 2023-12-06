@@ -16,7 +16,7 @@ namespace Infrastructure
                 options =>
                 options.UseNpgsql(
                     configuration.GetConnectionString
-                    ("ECommerceAppUserConnection"),
+                    ("ECommerceAppConnection"),
                     builder =>
                     builder.MigrationsAssembly(
                         typeof(ECommerceAppContext)
