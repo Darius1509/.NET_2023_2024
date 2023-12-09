@@ -1,0 +1,29 @@
+﻿<div class="top-row ps-3 navbar navbar-dark" style="background-color: #015401; color: #ffffff;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="" style="color: #ffffff;">ECommerceApp</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon" style="color: #015401;"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu" style="background-color: #006400; color: #ffffff;">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All" style="color: #ffffff;">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true" style="color: #006400;"></span> Home
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
