@@ -5,11 +5,13 @@ using ECommerceApp.Application.Features.Addresses.Queries.GetAll;
 using ECommerceApp.Application.Features.Addresses.Commands.UpdateAddress;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerceAppAPI.Controllers
 {
     public class AddressesController : ApiControllerBase
     {
+        [Authorize(Roles = "Admin, User")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
@@ -18,6 +20,7 @@ namespace ECommerceAppAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin, User")]
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(Guid id)
@@ -26,6 +29,7 @@ namespace ECommerceAppAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin, User")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Create(CreateAddressCommand command)
@@ -38,6 +42,7 @@ namespace ECommerceAppAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin, User")]
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(DeleteAddressCommand command)
@@ -50,6 +55,7 @@ namespace ECommerceAppAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin, User")]
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         public async Task<IActionResult> Update(UpdateAddressCommand command)
