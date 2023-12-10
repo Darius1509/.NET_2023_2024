@@ -1,0 +1,45 @@
+﻿@page "/categoryoverview"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+<h3>CategoryOverview</h3>
+<br />
+
+@if (Categories == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Category name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cat in Categories)
+            {
+                <tr>
+                    <td>@cat.CategoryName </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Inject]
+    public ICategoryDataService CategoryDataService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    public List<CategoryViewModel> Categories { get; set; }
+}
+
+@functions {
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = (await CategoryDataService.GetCategoriesAsync()).ToList();
+    }
+}
