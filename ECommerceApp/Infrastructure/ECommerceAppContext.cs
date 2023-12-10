@@ -1,4 +1,5 @@
-﻿using ECommerceApp.Domain.Entities;
+﻿using ECommerceApp.Application.Contracts.Interfaces;
+using ECommerceApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
