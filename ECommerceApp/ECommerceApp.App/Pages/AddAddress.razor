@@ -1,0 +1,70 @@
+﻿@page "/addaddress"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+<h3>Add Address</h3>
+
+<EditForm Model="@AddressViewModel" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary></ValidationSummary>
+
+    <div class="row mb-3 ms-2">
+        <label for="streetname" class="col-sm-3 form-label">Street: </label>
+        <div class="col-sm-5">
+            <InputText id="streetname" class="form-control" @bind-Value="@AddressViewModel.StreetName" placeholder="Enter street name"></InputText>
+            <ValidationMessage For="@(() => AddressViewModel.StreetName)" />
+        </div>
+        <label for="city" class="col-sm-3 form-label">City: </label>
+        <div class="col-sm-5">
+            <InputText id="city" class="form-control" @bind-Value="@AddressViewModel.City" placeholder="Enter city"></InputText>
+            <ValidationMessage For="@(() => AddressViewModel.City)" />
+        </div>
+        <label for="country" class="col-sm-3 form-label">Country: </label>
+        <div class="col-sm-5">
+            <InputText id="country" class="form-control" @bind-Value="@AddressViewModel.Country" placeholder="Enter country"></InputText>
+            <ValidationMessage For="@(() => AddressViewModel.Country)" />
+        </div>
+        <br />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save address</button>
+    <button class="btn btn-primary" @onclick="Cancel">Cancel</button>
+</EditForm>
+
+@code {
+    [Inject]
+    public IAddressDataService AddressDataService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    public AddressViewModel AddressViewModel { get; set; } = new AddressViewModel();
+
+    public string Message { get; set; }
+}
+
+@functions {
+    private async Task HandleValidSubmit()
+    {
+        var result = await AddressDataService.CreateAddressAsync(AddressViewModel);
+        if (result.IsSuccess)
+        {
+            Message = "Address created successfully";
+            NavigationManager.NavigateTo("/addressoverview");
+        }
+        else
+        {
+            Message = result.Message;
+            if (!string.IsNullOrWhiteSpace(result.ValidationErrors))
+            {
+                Message += result.ValidationErrors;
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/addressoverview");
+    }
+
+}

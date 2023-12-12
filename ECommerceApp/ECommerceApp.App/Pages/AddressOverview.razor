@@ -1,11 +1,11 @@
-﻿@page "/categoryoverview"
+﻿@page "/addressoverview"
 @using ECommerceApp.App.Contracts
 @using ECommerceApp.App.ViewModels
 @inject ITokenService TokenService
-<h3>CategoryOverview</h3>
+<h3>AddressOverview</h3>
 <br />
 
-@if (Categories == null)
+@if (Addresses == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -14,14 +14,23 @@ else
     <table>
         <thead>
             <tr>
-                <th>Category name</th>
+                <th>Address name</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var cat in Categories)
+            @foreach (var address in Addresses)
             {
                 <tr>
-                    <td>@cat.CategoryName </td>
+                    <td>@address.StreetName </td>
+                </tr>
+                <tr>
+                    <td>@address.City </td
+                </tr>
+                <tr>
+                    <td>@address.Country </td>
+                </tr>
+                <tr>
+                    <td>@address.PostalCode </td>
                 </tr>
             }
         </tbody>
@@ -30,12 +39,12 @@ else
 
 @code {
     [Inject]
-    public ICategoryDataService CategoryDataService { get; set; }
+    public IAddressDataService AddressDataService { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
-    public List<CategoryViewModel> Categories { get; set; }
+    public List<AddressViewModel> Addresses { get; set; }
 }
 
 @functions {
@@ -46,6 +55,7 @@ else
         {
             NavigationManager.NavigateTo("/login");
         }
-        Categories = (await CategoryDataService.GetCategoriesAsync()).ToList();
+
+        Addresses = (await AddressDataService.GetAddressesAsync()).ToList();
     }
 }

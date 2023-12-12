@@ -34,6 +34,9 @@ builder.Services.AddHttpClient<ICategoryDataService, CategoryDataService>(client
 {
     client.BaseAddress = new Uri("https://localhost:7040/");
 });
-
+builder.Services.AddHttpClient<IAddressDataService, AddressDataService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7040/");
+});
 
 await builder.Build().RunAsync();
