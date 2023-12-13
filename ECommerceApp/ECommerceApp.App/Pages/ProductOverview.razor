@@ -1,0 +1,64 @@
+﻿@page "/productoverview"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+@inject ITokenService TokenService
+<h3>ProductOverview</h3>
+<br />
+
+@if (Products == null)
+{
+        <p><em>Loading...</em></p>
+}
+else
+{
+        <table>
+            <thead>
+                <tr>
+                    <th>Product name</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var product in Products)
+            {
+                        <tr>
+                            <td><b> @product.ProductName </b></td>
+                        </tr>
+                        <tr>
+                            <td>@product.ProductDescription </td
+                        </tr>
+                        <tr>
+                            <td> Quantity: @product.ProductQuantity </td>
+                        </tr>
+                        <tr>
+                            <td> Price: @product.ProductPrice </td>
+                        </tr>
+                        <tr>
+                            <td> CategoryId: @product.ProductCategoryId </td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+
+@code {
+    [Inject]
+    public IProductDataService ProductDataService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    public List<ProductViewModel> Products { get; set; }
+}
+
+@functions {
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await TokenService.GetTokenAsync();
+        if (token == null)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+
+        Products = (await ProductDataService.GetProductsAsync()).ToList();
+    }
+}

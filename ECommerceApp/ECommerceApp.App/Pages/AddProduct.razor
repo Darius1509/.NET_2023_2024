@@ -1,0 +1,75 @@
+﻿@page "/addproduct"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+<h3>Add Product</h3>
+
+<EditForm Model="@ProductViewModel" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary></ValidationSummary>
+
+    <div class="row mb-3 ms-2">
+        <label for="productname" class="col-sm-3 form-label">Product Name: </label>
+        <div class="col-sm-5">
+            <InputText id="productname" class="form-control" @bind-Value="@ProductViewModel.ProductName" placeholder="Enter Product name"></InputText>
+            <ValidationMessage For="@(() => ProductViewModel.ProductName)" />
+        </div>
+        <label for="description" class="col-sm-3 form-label">Description: </label>
+        <div class="col-sm-5">
+            <InputText id="description" class="form-control" @bind-Value="@ProductViewModel.ProductDescription" placeholder="Enter description"></InputText>
+            <ValidationMessage For="@(() => ProductViewModel.ProductDescription)" />
+        </div>
+        <label for="quantity" class="col-sm-3 form-label">Quantity: </label>
+        <div class="col-sm-5">
+            <InputNumber id="quantity" class="form-control" @bind-Value="@ProductViewModel.ProductQuantity" placeholder="Enter quantity"></InputNumber>
+            <ValidationMessage For="@(() => ProductViewModel.ProductQuantity)" />
+        </div>
+        <label for="price" class="col-sm-3 form-label">Price: </label>
+        <div class="col-sm-5">
+            <InputNumber id="price" class="form-control" @bind-Value="@ProductViewModel.ProductPrice" placeholder="Enter price"></InputNumber>
+            <ValidationMessage For="@(() => ProductViewModel.ProductPrice)" />
+        </div>
+        <br />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Product</button>
+    <button class="btn btn-primary" @onclick="Cancel">Cancel</button>
+</EditForm>
+
+@code {
+    [Inject]
+    public IProductDataService ProductDataService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    public ProductViewModel ProductViewModel { get; set; } = new ProductViewModel();
+
+    public string Message { get; set; }
+}
+
+@functions {
+    private async Task HandleValidSubmit()
+    {
+        var result = await ProductDataService.CreateProductAsync(ProductViewModel);
+        if (result.IsSuccess)
+        {
+            Message = "Product created successfully";
+            NavigationManager.NavigateTo("/productoverview");
+        }
+        else
+        {
+            Message = result.Message;
+            if (!string.IsNullOrWhiteSpace(result.ValidationErrors))
+            {
+                Message += result.ValidationErrors;
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/productoverview");
+    }
+
+}
