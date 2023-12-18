@@ -44,5 +44,31 @@ namespace ECommerceApp.App.Services
             var addresses = JsonSerializer.Deserialize<List<ProductViewModel>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             return addresses!;
         }
+
+        public async Task<ProductViewModel> GetProductByIdAsync(Guid id)
+        {
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", await tokenService.GetTokenAsync());
+            var result = await httpClient.GetAsync($"{RequestUri}/{id}", HttpCompletionOption.ResponseHeadersRead);
+            result.EnsureSuccessStatusCode();
+            var content = await result.Content.ReadAsStringAsync();
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(content);
+            }
+            var address = JsonSerializer.Deserialize<ProductViewModel>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return address!;
+        }
+
+        public async Task<ApiResponse<ProductDto>> UpdateProductAsync(ProductViewModel productViewModel)
+        {
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", await tokenService.GetTokenAsync());
+            var result = await httpClient.PutAsJsonAsync($"{RequestUri}/{productViewModel.Id}", productViewModel);
+            result.EnsureSuccessStatusCode();
+            var response = await result.Content.ReadFromJsonAsync<ApiResponse<ProductDto>>();
+            response!.IsSuccess = result.IsSuccessStatusCode;
+            return response!;
+        }
     }
 }

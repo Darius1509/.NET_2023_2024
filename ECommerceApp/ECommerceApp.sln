@@ -31,9 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.App", "ECommer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B431D603-6F50-48F3-95DB-43234494E8F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.Domain.Tests", "ECommerceApp.Domain.Tests\ECommerceApp.Domain.Tests.csproj", "{328EF9CE-A253-4410-B1A0-298F45D315C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp.Domain.Tests", "ECommerceApp.Domain.Tests\ECommerceApp.Domain.Tests.csproj", "{328EF9CE-A253-4410-B1A0-298F45D315C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.Application.Tests", "ECommerceApp.Application.Tests\ECommerceApp.Application.Tests.csproj", "{D0874889-9C0B-429C-8E93-748AAB4D283E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp.Application.Tests", "ECommerceApp.Application.Tests\ECommerceApp.Application.Tests.csproj", "{D0874889-9C0B-429C-8E93-748AAB4D283E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
