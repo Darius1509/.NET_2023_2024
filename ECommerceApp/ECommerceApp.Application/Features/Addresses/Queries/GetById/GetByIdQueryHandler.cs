@@ -20,7 +20,7 @@ namespace ECommerceApp.Application.Features.Addresses.Queries.GetById
                 return new AddressDto
                 {
                     Id = address.Value.AddressId,
-                    Name = address.Value.StreetName,
+                    StreetName = address.Value.StreetName,
                     PostalCode = address.Value.PostalCode,
                     City = address.Value.City,
                     Country = address.Value.Country

@@ -4,7 +4,7 @@ namespace ECommerceApp.App.ViewModels
 {
     public class AddressViewModel
     {
-        public Guid AddressId { get; set; }
+        public Guid Id { get; set; }
         [Required(ErrorMessage = "Street name is required")]
         public string StreetName { get; set; } = string.Empty;
         [Required(ErrorMessage = "Postal code is required")]

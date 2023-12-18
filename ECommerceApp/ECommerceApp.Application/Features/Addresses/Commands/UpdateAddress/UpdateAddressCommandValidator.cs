@@ -7,7 +7,7 @@ namespace ECommerceApp.Application.Features.Addresses.Commands.UpdateAddress
     {
         public UpdateAddressCommandValidator()
         {
-            RuleFor(p => p.AddressId)
+            RuleFor(p => p.Id)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
 

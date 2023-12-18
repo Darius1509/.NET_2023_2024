@@ -45,7 +45,7 @@ namespace ECommerceApp.Application.Tests.Commands
             var validator = Substitute.For<IValidator<UpdateCategoryCommand>>();
             validator.ValidateAsync(updateCommand, Arg.Any<CancellationToken>()).Returns(new ValidationResult(new List<ValidationFailure>()
             {
-                new ValidationFailure("Name", "Name is required")
+                new ValidationFailure("StreetName", "StreetName is required")
             }));
 
             // Mock the repository
@@ -60,7 +60,7 @@ namespace ECommerceApp.Application.Tests.Commands
             result.ValidationsErrors.Should().NotBeNullOrEmpty();
 
             // Assert
-            result.ValidationsErrors.Should().Contain(error => error.Contains("Name is required"));
+            result.ValidationsErrors.Should().Contain(error => error.Contains("StreetName is required"));
         }
     }
 }

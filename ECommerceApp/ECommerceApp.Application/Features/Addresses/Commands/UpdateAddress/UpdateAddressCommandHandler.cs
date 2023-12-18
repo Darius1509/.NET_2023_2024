@@ -29,13 +29,13 @@ namespace ECommerceApp.Application.Features.Addresses.Commands.UpdateAddress
             }
             if (response.Success)
             {
-                var address = Address.Update(request.AddressId, request.StreetName, request.PostalCode, request.City, request.Country);
+                var address = Address.Update(request.Id, request.StreetName, request.PostalCode, request.City, request.Country);
                 if (address.IsSuccess)
                 {
                     await repository.UpdateAsync(address.Value);
                     response.Address = new UpdateAddressDto
                     {
-                        AddressId = address.Value.AddressId,
+                        Id = address.Value.AddressId,
                         StreetName = address.Value.StreetName,
                         PostalCode = address.Value.PostalCode,
                         City = address.Value.City,

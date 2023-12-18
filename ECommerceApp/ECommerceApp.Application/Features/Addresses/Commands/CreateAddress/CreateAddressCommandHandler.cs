@@ -35,7 +35,7 @@ namespace ECommerceApp.Application.Features.Addresses.Commands.CreateAddress
                     await repository.AddAsync(address.Value);
                     response.Address = new CreateAddressDto
                     {
-                        AddressId = address.Value.AddressId,
+                        Id = address.Value.AddressId,
                         StreetName = address.Value.StreetName,
                         PostalCode = address.Value.PostalCode,
                         City = address.Value.City,

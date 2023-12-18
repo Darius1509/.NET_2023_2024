@@ -27,7 +27,7 @@ namespace ECommerceApp.Application.Features.Addresses.Commands.DeleteAddress
             response.Success = true;
             response.Address = new DeleteAddressDto
             {
-                AddressId = address.Value.AddressId,
+                Id = address.Value.AddressId,
                 StreetName = address.Value.StreetName,
                 PostalCode = address.Value.PostalCode,
                 City = address.Value.City,

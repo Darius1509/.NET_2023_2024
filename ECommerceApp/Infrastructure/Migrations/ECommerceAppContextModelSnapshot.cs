@@ -42,7 +42,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("PostalCode")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("StreetName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -59,7 +59,7 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("StreetName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -138,7 +138,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("StreetName")
                         .IsRequired()
                         .HasColumnType("text");
 

@@ -4,10 +4,10 @@ namespace ECommerceApp.Application.Models.Identity
 {
     public class RegistrationModel
     {
-        [Required(ErrorMessage = "User Name is required")]
+        [Required(ErrorMessage = "User StreetName is required")]
         public string? Username { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
+        [Required(ErrorMessage = "StreetName is required")]
         public string? Name { get; set; }
 
         [EmailAddress]

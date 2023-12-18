@@ -22,7 +22,7 @@ namespace ECommerceApp.Application.Features.Addresses.Queries.GetAll
                 listOfAddresses.Add(new AddressDto
                 {
                     Id = address.AddressId,
-                    Name = address.StreetName,
+                    StreetName = address.StreetName,
                     PostalCode = address.PostalCode,
                     City = address.City,
                     Country = address.Country

@@ -44,5 +44,31 @@ namespace ECommerceApp.App.Services
             var addresses = JsonSerializer.Deserialize<List<AddressViewModel>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             return addresses!;
         }
+
+        public async Task<AddressViewModel> GetAddressByIdAsync(Guid id)
+        {
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", await tokenService.GetTokenAsync());
+            var result = await httpClient.GetAsync($"{RequestUri}/{id}", HttpCompletionOption.ResponseHeadersRead);
+            result.EnsureSuccessStatusCode();
+            var content = await result.Content.ReadAsStringAsync();
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(content);
+            }
+            var address = JsonSerializer.Deserialize<AddressViewModel>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return address!;
+        }
+
+        public async Task<ApiResponse<AddressDto>> UpdateAddressAsync(AddressViewModel addressViewModel)
+        {
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", await tokenService.GetTokenAsync());
+            var result = await httpClient.PutAsJsonAsync($"{RequestUri}/{addressViewModel.Id}", addressViewModel);
+            result.EnsureSuccessStatusCode();
+            var response = await result.Content.ReadFromJsonAsync<ApiResponse<AddressDto>>();
+            response!.IsSuccess = result.IsSuccessStatusCode;
+            return response!;
+        }
     }
 }

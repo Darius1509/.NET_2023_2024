@@ -50,7 +50,7 @@ namespace Identity.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("StreetName")
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
@@ -101,7 +101,7 @@ namespace Identity.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("StreetName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
@@ -213,13 +213,13 @@ namespace Identity.Migrations
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("StreetName")
                         .HasColumnType("text");
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                    b.HasKey("UserId", "LoginProvider", "StreetName");
 
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
