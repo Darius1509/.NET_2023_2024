@@ -21,8 +21,8 @@ namespace ECommerceApp.Application.Features.Categories.Queries.GetAllCategories
             {
                 listOfCategories.Add(new CategoryDto
                 {
-                    CategoryId = category.CategoryId,
-                    CategoryName = category.CategoryName
+                    Id = category.CategoryId,
+                    Name = category.CategoryName
                 });
             }
             return listOfCategories;

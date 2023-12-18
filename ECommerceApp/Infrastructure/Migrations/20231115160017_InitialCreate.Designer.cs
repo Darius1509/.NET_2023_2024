@@ -27,7 +27,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ECommerceApp.Domain.Entities.Address", b =>
                 {
-                    b.Property<Guid>("AddressId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -45,11 +45,11 @@ namespace Infrastructure.Migrations
                     b.Property<int>("PostalCode")
                         .HasColumnType("integer");
 
-                    b.Property<string>("StreetName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("AddressId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
@@ -58,15 +58,15 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ECommerceApp.Domain.Entities.Category", b =>
                 {
-                    b.Property<Guid>("CategoryId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
                 });
@@ -122,11 +122,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ECommerceApp.Domain.Entities.Product", b =>
                 {
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CategoryId")
+                    b.Property<Guid?>("Id")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("CustomerId")
@@ -138,22 +138,22 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("ProductCategoryId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProductDescription")
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ProductPrice")
+                    b.Property<int>("Price")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ProductQuantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("Id");
 
                     b.HasIndex("CustomerId");
 
@@ -180,7 +180,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("ECommerceApp.Domain.Entities.Category", null)
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("Id");
 
                     b.HasOne("ECommerceApp.Domain.Entities.Customer", null)
                         .WithMany("CustomerWishlist")

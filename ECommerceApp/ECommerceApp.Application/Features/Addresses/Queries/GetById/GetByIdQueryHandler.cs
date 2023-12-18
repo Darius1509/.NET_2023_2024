@@ -19,8 +19,8 @@ namespace ECommerceApp.Application.Features.Addresses.Queries.GetById
             {
                 return new AddressDto
                 {
-                    AddressId = address.Value.AddressId,
-                    StreetName = address.Value.StreetName,
+                    Id = address.Value.AddressId,
+                    Name = address.Value.StreetName,
                     PostalCode = address.Value.PostalCode,
                     City = address.Value.City,
                     Country = address.Value.Country

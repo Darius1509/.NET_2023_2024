@@ -19,8 +19,8 @@ namespace ECommerceApp.Application.Features.Categories.Queries.GetByIdCategory
             {
                 return new CategoryDto
                 {
-                    CategoryId = category.Value.CategoryId,
-                    CategoryName = category.Value.CategoryName
+                    Id = category.Value.CategoryId,
+                    Name = category.Value.CategoryName
                 };
             }
             else

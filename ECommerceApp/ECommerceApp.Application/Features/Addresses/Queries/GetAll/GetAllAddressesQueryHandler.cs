@@ -21,8 +21,8 @@ namespace ECommerceApp.Application.Features.Addresses.Queries.GetAll
             {
                 listOfAddresses.Add(new AddressDto
                 {
-                    AddressId = address.AddressId,
-                    StreetName = address.StreetName,
+                    Id = address.AddressId,
+                    Name = address.StreetName,
                     PostalCode = address.PostalCode,
                     City = address.City,
                     Country = address.Country

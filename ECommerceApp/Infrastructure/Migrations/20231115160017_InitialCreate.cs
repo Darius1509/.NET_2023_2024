@@ -99,7 +99,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId");
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Customers_CustomerId",
                         column: x => x.CustomerId,
@@ -125,7 +125,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
-                column: "CategoryId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CustomerId",
