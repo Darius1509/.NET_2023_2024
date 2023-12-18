@@ -27,8 +27,8 @@ namespace ECommerceApp.Application.Features.Categories.Commands.DeleteCategory
             response.Success = true;
             response.Category = new DeleteCategoryDto
             {
-                CategoryId = category.Value.CategoryId,
-                CategoryName = category.Value.CategoryName
+                Id = category.Value.CategoryId,
+                Name = category.Value.CategoryName
             };
             return response;
         }

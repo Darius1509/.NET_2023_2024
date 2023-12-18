@@ -16,11 +16,11 @@ namespace ECommerceApp.Application.Tests.Commands
         {
             // Arrange
             var categoryId = Guid.NewGuid();
-            var updateCommand = new UpdateCategoryCommand { CategoryId = categoryId, Name = "Updated Category" };
+            var updateCommand = new UpdateCategoryCommand { Id = categoryId, Name = "Updated Category" };
             var repository = Substitute.For<ICategoryRepository>();
 
             var existingCategory = Category.Create("Existing Category").Value;
-            existingCategory.GetType().GetProperty("CategoryId").SetValue(existingCategory, categoryId); // Set the CategoryId
+            existingCategory.GetType().GetProperty("Id").SetValue(existingCategory, categoryId); // Set the Id
 
             repository.FindByIdAsync(categoryId).Returns(Task.FromResult(Result<Category>.Success(existingCategory)));
 
@@ -39,7 +39,7 @@ namespace ECommerceApp.Application.Tests.Commands
         public async Task Handle_InvalidRequest_ReturnsValidationErrors()
         {
             // Arrange
-            var updateCommand = new UpdateCategoryCommand { CategoryId = Guid.NewGuid(), Name = "" };
+            var updateCommand = new UpdateCategoryCommand { Id = Guid.NewGuid(), Name = "" };
 
             // Mock the validator
             var validator = Substitute.For<IValidator<UpdateCategoryCommand>>();

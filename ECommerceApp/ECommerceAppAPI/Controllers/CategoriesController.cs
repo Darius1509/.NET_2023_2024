@@ -3,6 +3,7 @@ using ECommerceApp.Application.Features.Categories.Commands.CreateCategory;
 using ECommerceApp.Application.Features.Categories.Commands.DeleteCategory;
 using ECommerceApp.Application.Features.Categories.Commands.UpdateCategory;
 using ECommerceApp.Application.Features.Categories.Queries.GetAllCategories;
+using ECommerceApp.Application.Features.Categories.Queries.GetByIdCategory;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,7 @@ namespace ECommerceAppAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await Mediator.Send(new GetByIdAddressQuery(id));
+            var result = await Mediator.Send(new GetByIdCategoryQuery(id));
             return Ok(result);
         }
 

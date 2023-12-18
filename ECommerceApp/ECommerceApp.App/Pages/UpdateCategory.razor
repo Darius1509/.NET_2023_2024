@@ -1,0 +1,64 @@
+﻿@page "/updatecategory/{id:guid}"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+<h3>Update Category</h3>
+
+<EditForm Model="@CategoryViewModel" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary></ValidationSummary>
+
+    <div class="row mb-3 ms-2">
+        <label for="categoryname" class="col-sm-3 form-label">Category Name: </label>
+        <div class="col-sm-5">
+            <InputText id="categoryname" class="form-control" @bind-Value="@CategoryViewModel.Name" placeholder="Enter category name"></InputText>
+            <ValidationMessage For="@(() => CategoryViewModel.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update category</button>
+    <button class="btn btn-primary" @onclick="Cancel">Cancel</button>
+</EditForm>
+
+@code {
+    [Inject]
+    public ICategoryDataService CategoryDataService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    public CategoryViewModel CategoryViewModel { get; set; } = new CategoryViewModel();
+
+    public string Message { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        CategoryViewModel = await CategoryDataService.GetCategoryByIdAsync(Id);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var result = await CategoryDataService.UpdateCategoryAsync(CategoryViewModel);
+        if (result.IsSuccess)
+        {
+            Message = "Category updated successfully";
+            NavigationManager.NavigateTo("/categoryoverview");
+        }
+        else
+        {
+            Message = result.Message;
+            if (!string.IsNullOrWhiteSpace(result.ValidationErrors))
+            {
+                Message += result.ValidationErrors;
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/categoryoverview");
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using ECommerceApp.Application.Persistence;
+using ECommerceApp.Domain.Entities;
 
 namespace ECommerceApp.Application.Features.Categories.Commands.UpdateCategory
 {
@@ -28,22 +29,24 @@ namespace ECommerceApp.Application.Features.Categories.Commands.UpdateCategory
             }
             if (response.Success)
             {
-                var category = await repository.FindByIdAsync(request.CategoryId);
-                if (!category.IsSuccess)
+                var category = Category.Update(request.Id, request.Name);
+                if (category.IsSuccess)
+                {
+                    await repository.UpdateAsync(category.Value);
+                    response.Category = new UpdateCategoryDto
+                    {
+                        Id = category.Value.CategoryId,
+                        Name = category.Value.CategoryName
+                    };
+                }
+                else
                 {
                     response.Success = false;
                     response.ValidationsErrors = new List<string>()
                     {
-                        "Category not found"
+                        category.ErrorMessage
                     };
-                }
-                response.Success = true;
-                response.Category = new UpdateCategoryDto
-                {
-                    Id = category.Value.CategoryId,
-                    CategoryName = category.Value.CategoryName
-                };
-
+                }   
             }
             return response;
         }

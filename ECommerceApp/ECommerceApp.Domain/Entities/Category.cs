@@ -24,6 +24,22 @@ namespace ECommerceApp.Domain.Entities
             return Result<Category>.Success(new Category(Guid.NewGuid(), categoryName));
         }
 
+        public static Result<Category> Update(Guid categoryId, string categoryName)
+        {
+            if (categoryId == Guid.Empty)
+            {
+                return Result<Category>.Failure("Category Id cannot be empty");
+            }
+            if (string.IsNullOrEmpty(categoryName))
+            {
+                return Result<Category>.Failure("Category name cannot be empty");
+            }
+
+            var category = new Category(categoryId, categoryName);
+
+            return Result<Category>.Success(category);
+        }
+
         public void AttachProduct(Product product)
         {
             if (product == null)
