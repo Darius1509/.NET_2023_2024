@@ -38,12 +38,20 @@ namespace ECommerceApp.Domain.Entities
 
         public void AttachProduct(Product product)
         {
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product), "Product cannot be null");
+            }
             if (OrderProducts == null) { OrderProducts = new List<Product>(); }
             OrderProducts.Add(product);
         }
 
         public void RemoveProduct(Product product)
         {
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product), "Product cannot be null");
+            }
             if (OrderProducts == null) { OrderProducts = new List<Product>(); }
             OrderProducts.Remove(product);
         }

@@ -26,6 +26,10 @@ namespace ECommerceApp.Domain.Entities
 
         public void AttachProduct(Product product)
         {
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product), "Product cannot be null");
+            }
             if (Products == null) { Products = new List<Product>(); }
             Products.Add(product);
         }
