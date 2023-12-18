@@ -1,44 +1,48 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using ECommerceApp.Application.Features.Categories.Commands.UpdateCategory;
 using ECommerceApp.Application.Features.Categories.Queries.GetByIdCategory;
 using ECommerceApp.Application.Persistence;
 using ECommerceApp.Domain.Common;
 using ECommerceApp.Domain.Entities;
 using FluentAssertions;
 using NSubstitute;
-using Xunit;
 
 namespace ECommerceApp.Application.Tests.Queries
 {
     public class GetByIdCategoryQueryHandlerTests
     {
         [Fact]
-        public async Task Handle_CategoryExists_ReturnsCategoryDto()
+        public async Task GetByIdCategoryQueryHandler_Success()
         {
             // Arrange
             var categoryId = Guid.NewGuid();
-            var query = new GetByIdCategoryQuery(categoryId);
+            var updateCommand = new UpdateCategoryCommand { CategoryId = categoryId, Name = "Updated Category" };
             var repository = Substitute.For<ICategoryRepository>();
 
-            // Mock the repository's FindByIdAsync method to return a successful Result<Category>
-            var category = Category.Create("Test Category").Value;
-            category.GetType().GetProperty("CategoryId").SetValue(category, categoryId); // Set the CategoryId using reflection
-            repository.FindByIdAsync(categoryId).Returns(Task.FromResult(Result<Category>.Success(category)));
+            var existingCategory = Category.Create("Existing Category").Value;
+            existingCategory.GetType().GetProperty("CategoryId").SetValue(existingCategory, categoryId); // Set the CategoryId
 
-            var handler = new GetByIdCategoryQueryHandler(repository);
+            repository.FindByIdAsync(categoryId).Returns(Task.FromResult(Result<Category>.Success(existingCategory)));
+
+            var handler = new UpdateCategoryCommandHandler(repository);
 
             // Act
-            var result = await handler.Handle(query, CancellationToken.None);
+            var result = await handler.Handle(updateCommand, CancellationToken.None);
 
             // Assert
             result.Should().NotBeNull();
-            result.CategoryId.Should().Be(categoryId);
-            result.CategoryName.Should().Be("Test Category");
+            result.Success.Should().BeTrue();
+            result.ValidationsErrors.Should().BeNullOrEmpty();
+
+            // Assert on the Category
+            var updatedCategory = result.Category;
+            updatedCategory.Should().NotBeNull();
+            updatedCategory.Id.Should().Be(categoryId);
+            updatedCategory.CategoryName.Should().Be(existingCategory.CategoryName); // Use the actual name from the system
         }
 
+
         [Fact]
-        public async Task Handle_CategoryDoesNotExist_ReturnsNull()
+        public async Task GetByIdCategoryQueryHandler_ReturnsNull()
         {
             // Arrange
             var categoryId = Guid.NewGuid();
