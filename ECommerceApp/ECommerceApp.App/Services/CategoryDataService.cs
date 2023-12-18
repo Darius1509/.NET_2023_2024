@@ -44,5 +44,31 @@ namespace ECommerceApp.App.Services
             var categories = JsonSerializer.Deserialize<List<CategoryViewModel>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             return categories!;
         }
+
+        public async Task<CategoryViewModel> GetCategoryByIdAsync(Guid id)
+        {
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", await tokenService.GetTokenAsync());
+            var result = await httpClient.GetAsync($"{RequestUri}/{id}", HttpCompletionOption.ResponseHeadersRead);
+            result.EnsureSuccessStatusCode();
+            var content = await result.Content.ReadAsStringAsync();
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(content);
+            }
+            var category = JsonSerializer.Deserialize<CategoryViewModel>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return category!;
+        }
+
+        public async Task<ApiResponse<CategoryDto>> UpdateCategoryAsync(CategoryViewModel categoryViewModel)
+        {
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", await tokenService.GetTokenAsync());
+            var result = await httpClient.PutAsJsonAsync($"{RequestUri}/{categoryViewModel.Id}", categoryViewModel);
+            result.EnsureSuccessStatusCode();
+            var response = await result.Content.ReadFromJsonAsync<ApiResponse<CategoryDto>>();
+            response!.IsSuccess = result.IsSuccessStatusCode;
+            return response!;
+        }
     }
 }

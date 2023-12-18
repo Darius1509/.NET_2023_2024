@@ -6,7 +6,7 @@ namespace ECommerceApp.Application.Features.Categories.Commands.UpdateCategory
     {
         public UpdateCategoryCommandValidator()
         {
-           RuleFor(c => c.CategoryId)
+           RuleFor(c => c.Id)
                     .NotEmpty().WithMessage("{PropertyName} is required.")
                     .NotNull();
     

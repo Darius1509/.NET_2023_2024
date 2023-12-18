@@ -15,11 +15,11 @@ namespace ECommerceApp.Application.Tests.Queries
         {
             // Arrange
             var categoryId = Guid.NewGuid();
-            var updateCommand = new UpdateCategoryCommand { CategoryId = categoryId, Name = "Updated Category" };
+            var updateCommand = new UpdateCategoryCommand { Id = categoryId, Name = "Updated Category" };
             var repository = Substitute.For<ICategoryRepository>();
 
             var existingCategory = Category.Create("Existing Category").Value;
-            existingCategory.GetType().GetProperty("CategoryId").SetValue(existingCategory, categoryId); // Set the CategoryId
+            existingCategory.GetType().GetProperty("Id").SetValue(existingCategory, categoryId); // Set the Id
 
             repository.FindByIdAsync(categoryId).Returns(Task.FromResult(Result<Category>.Success(existingCategory)));
 
@@ -37,7 +37,7 @@ namespace ECommerceApp.Application.Tests.Queries
             var updatedCategory = result.Category;
             updatedCategory.Should().NotBeNull();
             updatedCategory.Id.Should().Be(categoryId);
-            updatedCategory.CategoryName.Should().Be(existingCategory.CategoryName); // Use the actual name from the system
+            updatedCategory.Name.Should().Be(existingCategory.CategoryName); // Use the actual name from the system
         }
 
 

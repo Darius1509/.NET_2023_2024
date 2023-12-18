@@ -25,7 +25,7 @@ namespace ECommerceApp.Application.Tests.Commands
             result.Success.Should().BeTrue();
             result.Category.Should().NotBeNull();
             result.Category.Id.Should().NotBeEmpty();
-            result.Category.CategoryName.Should().Be(categoryName);
+            result.Category.Name.Should().Be(categoryName);
         }
 
 

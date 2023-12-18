@@ -36,7 +36,7 @@ namespace ECommerceApp.Application.Features.Categories.Commands.CreateCategory
                     response.Category = new CreateCategoryDto
                     {
                         Id = category.Value.CategoryId,
-                        CategoryName = category.Value.CategoryName
+                        Name = category.Value.CategoryName
                     };
                 }
                 else
