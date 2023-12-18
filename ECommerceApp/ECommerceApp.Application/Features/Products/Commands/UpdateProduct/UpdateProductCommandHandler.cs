@@ -28,7 +28,7 @@ namespace ECommerceApp.Application.Features.Products.Commands.UpdateProduct
             }
             if (response.Success)
             {
-                var product = Product.Update(request.productId,request.ProductName, request.ProductQuantity, request.ProductPrice, request.ProductCategoryId);
+                var product = Product.Update(request.id,request.name, request.quantity, request.price, request.productCategoryId);
                 if (product.IsSuccess)
                 {
                     await repository.UpdateAsync(product.Value);

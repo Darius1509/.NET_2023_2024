@@ -33,7 +33,7 @@ else
                             <td> Price: @product.Price </td>
                         </tr>
                         <tr>
-                            <td> CategoryId: @product.ProductCategoryId </td>
+                            <td> Category: @Categories.FirstOrDefault(c => c.Id == product.ProductCategoryId)?.Name </td>
                         </tr>
             }
             </tbody>
@@ -45,9 +45,14 @@ else
     public IProductDataService ProductDataService { get; set; }
 
     [Inject]
+    public ICategoryDataService CategoryDataService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     public List<ProductViewModel> Products { get; set; }
+
+    public List<CategoryViewModel> Categories { get; set; }
 }
 
 @functions {
@@ -60,5 +65,6 @@ else
         }
 
         Products = (await ProductDataService.GetProductsAsync()).ToList();
+        Categories = (await CategoryDataService.GetCategoriesAsync()).ToList();
     }
 }

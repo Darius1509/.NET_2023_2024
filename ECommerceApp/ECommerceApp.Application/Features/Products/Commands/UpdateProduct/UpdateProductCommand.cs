@@ -4,11 +4,11 @@ namespace ECommerceApp.Application.Features.Products.Commands.UpdateProduct
 {
     public class UpdateProductCommand : IRequest<UpdateProductCommandResponse>
     {
-        public Guid productId { get; set; }
-        public string ProductName { get; set; } = string.Empty;
-        public string ProductDescription { get; set; } = string.Empty;
-        public int ProductQuantity { get; set; }
-        public int ProductPrice { get; set; }
-        public Guid ProductCategoryId { get; set; }
+        public Guid id { get; set; }
+        public string name { get; set; } = string.Empty;
+        public string description { get; set; } = string.Empty;
+        public int quantity { get; set; }
+        public int price { get; set; }
+        public Guid productCategoryId { get; set; }
     }
 }
