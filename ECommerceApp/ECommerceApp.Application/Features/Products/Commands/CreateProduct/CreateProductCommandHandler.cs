@@ -29,17 +29,17 @@ namespace ECommerceApp.Application.Features.Products.Commands.CreateProduct
             }
             if (response.Success)
             {
-                var product = Product.Create(request.ProductName, request.ProductQuantity, request.ProductPrice, request.ProductCategoryId);
+                var product = Product.Create(request.Name, request.Quantity, request.Price, request.ProductCategoryId);
                 if (product.IsSuccess)
                 {
                     await repository.AddAsync(product.Value);
                     response.Product = new CreateProductDto
                     {
-                        ProductId = product.Value.ProductId,
-                        ProductName = product.Value.ProductName,
-                        ProductDescription = product.Value.ProductDescription,
-                        ProductQuantity = product.Value.ProductQuantity,
-                        ProductPrice = product.Value.ProductPrice,
+                        Id = product.Value.ProductId,
+                        Name = product.Value.ProductName,
+                        Description = product.Value.ProductDescription,
+                        Quantity = product.Value.ProductQuantity,
+                        Price = product.Value.ProductPrice,
                         ProductCategoryId = product.Value.ProductCategoryId
                     };
                 }

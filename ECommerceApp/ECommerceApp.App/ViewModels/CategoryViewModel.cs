@@ -4,9 +4,9 @@ namespace ECommerceApp.App.ViewModels
 {
     public class CategoryViewModel
     {
-        public Guid CategoryId { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Category name is required")]
-        public string CategoryName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
     }
 }

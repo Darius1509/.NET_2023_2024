@@ -11,25 +11,35 @@
     <div class="row mb-3 ms-2">
         <label for="productname" class="col-sm-3 form-label">Product Name: </label>
         <div class="col-sm-5">
-            <InputText id="productname" class="form-control" @bind-Value="@ProductViewModel.ProductName" placeholder="Enter Product name"></InputText>
-            <ValidationMessage For="@(() => ProductViewModel.ProductName)" />
+            <InputText id="productname" class="form-control" @bind-Value="@ProductViewModel.Name" placeholder="Enter Product name"></InputText>
+            <ValidationMessage For="@(() => ProductViewModel.Name)" />
         </div>
         <label for="description" class="col-sm-3 form-label">Description: </label>
         <div class="col-sm-5">
-            <InputText id="description" class="form-control" @bind-Value="@ProductViewModel.ProductDescription" placeholder="Enter description"></InputText>
-            <ValidationMessage For="@(() => ProductViewModel.ProductDescription)" />
+            <InputText id="description" class="form-control" @bind-Value="@ProductViewModel.Description" placeholder="Enter description"></InputText>
+            <ValidationMessage For="@(() => ProductViewModel.Description)" />
         </div>
         <label for="quantity" class="col-sm-3 form-label">Quantity: </label>
         <div class="col-sm-5">
-            <InputNumber id="quantity" class="form-control" @bind-Value="@ProductViewModel.ProductQuantity" placeholder="Enter quantity"></InputNumber>
-            <ValidationMessage For="@(() => ProductViewModel.ProductQuantity)" />
+            <InputNumber id="quantity" class="form-control" @bind-Value="@ProductViewModel.Quantity" placeholder="Enter quantity"></InputNumber>
+            <ValidationMessage For="@(() => ProductViewModel.Quantity)" />
         </div>
         <label for="price" class="col-sm-3 form-label">Price: </label>
         <div class="col-sm-5">
-            <InputNumber id="price" class="form-control" @bind-Value="@ProductViewModel.ProductPrice" placeholder="Enter price"></InputNumber>
-            <ValidationMessage For="@(() => ProductViewModel.ProductPrice)" />
+            <InputNumber id="price" class="form-control" @bind-Value="@ProductViewModel.Price" placeholder="Enter price"></InputNumber>
+            <ValidationMessage For="@(() => ProductViewModel.Price)" />
         </div>
-        <br />
+        <label for="category" class="col-sm-3 form-label">Category: </label>
+        <div class="col-sm-5">
+            <select id="category" class="form-control" @bind="@ProductViewModel.ProductCategoryId">
+                <option value="">Select Category</option>
+                @foreach (var category in Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+            <ValidationMessage For="@(() => ProductViewModel.ProductCategoryId)" />
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary">Save Product</button>
@@ -41,9 +51,14 @@
     public IProductDataService ProductDataService { get; set; }
 
     [Inject]
+    public ICategoryDataService CategoryDataService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     public ProductViewModel ProductViewModel { get; set; } = new ProductViewModel();
+
+    public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
 
     public string Message { get; set; }
 }
@@ -70,6 +85,11 @@
     private void Cancel()
     {
         NavigationManager.NavigateTo("/productoverview");
+    }
+
+protected override async Task OnInitializedAsync()
+    {
+        Categories = await CategoryDataService.GetCategoriesAsync();
     }
 
 }

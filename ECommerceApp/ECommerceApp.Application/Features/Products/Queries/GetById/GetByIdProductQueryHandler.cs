@@ -19,11 +19,11 @@ namespace ECommerceApp.Application.Features.Products.Queries.GetById
             {
                 return new ProductDto
                 {
-                    ProductId = product.Value.ProductId,
-                    ProductName = product.Value.ProductName,
-                    ProductDescription = product.Value.ProductDescription,
-                    ProductQuantity = product.Value.ProductQuantity,
-                    ProductPrice = product.Value.ProductPrice,
+                    Id = product.Value.ProductId,
+                    Name = product.Value.ProductName,
+                    Description = product.Value.ProductDescription,
+                    Quantity = product.Value.ProductQuantity,
+                    Price = product.Value.ProductPrice,
                     ProductCategoryId = product.Value.ProductCategoryId
                 };
             }

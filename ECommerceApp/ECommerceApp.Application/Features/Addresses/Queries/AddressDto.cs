@@ -2,8 +2,8 @@
 {
     public class AddressDto
     {
-        public Guid AddressId { get; set; }
-        public string StreetName { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public int PostalCode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }

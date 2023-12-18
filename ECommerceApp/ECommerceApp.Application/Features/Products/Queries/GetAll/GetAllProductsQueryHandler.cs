@@ -21,11 +21,11 @@ namespace ECommerceApp.Application.Features.Products.Queries.GetAll
             {
                 listOfProducts.Add(new ProductDto
                 {
-                    ProductId = product.ProductId,
-                    ProductName = product.ProductName,
-                    ProductDescription = product.ProductDescription,
-                    ProductQuantity = product.ProductQuantity,
-                    ProductPrice = product.ProductPrice,
+                    Id = product.ProductId,
+                    Name = product.ProductName,
+                    Description = product.ProductDescription,
+                    Quantity = product.ProductQuantity,
+                    Price = product.ProductPrice,
                     ProductCategoryId = product.ProductCategoryId
                 });
             }

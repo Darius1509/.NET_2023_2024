@@ -11,8 +11,8 @@
     <div class="row mb-3 ms-2">
         <label for="categoryname" class="col-sm-3 form-label">Category name:</label>
         <div class="col-sm-5">
-            <InputText id="categoryname" class="form-control" @bind-Value="@CategoryViewModel.CategoryName" placeholder="Enter category name"></InputText>
-            <ValidationMessage For="@(() => CategoryViewModel.CategoryName)" />
+            <InputText id="categoryname" class="form-control" @bind-Value="@CategoryViewModel.Name" placeholder="Enter category name"></InputText>
+            <ValidationMessage For="@(() => CategoryViewModel.Name)" />
         </div>
     </div>
 
