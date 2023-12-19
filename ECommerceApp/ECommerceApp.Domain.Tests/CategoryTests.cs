@@ -22,9 +22,10 @@ namespace ECommerceApp.Domain.Tests
             var result = Category.Create(null);
             // Assert
             //Assert.False(result.IsSuccess);
-            result.IsSuccess.Should().BeFalse();    
-        }
+            result.IsSuccess.Should().BeFalse();
+            Assert.Equal("Category name cannot be empty", result.ErrorMessage);
 
+        }
         [Fact]
         public void When_UpdateCategoryIsCalled_WithValidParameters_Then_SuccessIsReturned()
         {
