@@ -22,6 +22,10 @@ namespace ECommerceApp.Domain.Entities
 
         public void AttachDescription(string productDescription)
         {
+            if (String.IsNullOrWhiteSpace(productDescription))
+            {
+                throw new ArgumentNullException(nameof(productDescription), "Product Description cannot be null");
+            }
             ProductDescription = productDescription;
         }
 

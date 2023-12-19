@@ -19,7 +19,7 @@ namespace ECommerceApp.Application.Tests.Commands
 
             // Mock the repository's FindByIdAsync method to return a successful Result<Category>
             var category = Category.Create("Test Category").Value;
-            category.GetType().GetProperty("Id").SetValue(category, categoryId);
+            category.GetType().GetProperty("CategoryId").SetValue(category, categoryId);
             repository.FindByIdAsync(categoryId).Returns(Task.FromResult(Result<Category>.Success(category)));
 
             var handler = new DeleteCategoryCommandHandler(repository);

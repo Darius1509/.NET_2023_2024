@@ -26,6 +26,33 @@ namespace ECommerceApp.Domain.Tests
         }
 
         [Fact]
+        public void When_UpdateCategoryIsCalled_WithValidParameters_Then_SuccessIsReturned()
+        {
+            // Arrange & Act
+            var result = Category.Update(Guid.NewGuid(), "Category Name");
+
+            result.IsSuccess.Should().BeTrue();
+        }
+
+        [Fact]
+        public void When_UpdateCategoryIsCalled_WithInvalidId_Then_FailureIsReturned()
+        {
+            // Arrange & Act
+            var result = Category.Update(Guid.Empty, "Category Name");
+
+            result.IsSuccess.Should().BeFalse();
+        }
+
+        [Fact]
+        public void When_UpdateCategoryIsCalled_WithInvalidName_Then_FailureIsReturned()
+        {
+            // Arrange & Act
+            var result = Category.Update(Guid.NewGuid(), "");
+
+            result.IsSuccess.Should().BeFalse();
+        }
+
+        [Fact]
         public void When_AttachProductIsCalled_Then_ProductIsAddedToCategory()
         {
             // Arrange

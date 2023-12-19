@@ -20,7 +20,7 @@ namespace ECommerceApp.Application.Tests.Commands
             var repository = Substitute.For<ICategoryRepository>();
 
             var existingCategory = Category.Create("Existing Category").Value;
-            existingCategory.GetType().GetProperty("Id").SetValue(existingCategory, categoryId); // Set the Id
+            existingCategory.GetType().GetProperty("CategoryId").SetValue(existingCategory, categoryId); // Set the Id
 
             repository.FindByIdAsync(categoryId).Returns(Task.FromResult(Result<Category>.Success(existingCategory)));
 
@@ -39,13 +39,13 @@ namespace ECommerceApp.Application.Tests.Commands
         public async Task Handle_InvalidRequest_ReturnsValidationErrors()
         {
             // Arrange
-            var updateCommand = new UpdateCategoryCommand { Id = Guid.NewGuid(), Name = "" };
+            var updateCommand = new UpdateCategoryCommand { Id = Guid.NewGuid(), Name = null };
 
             // Mock the validator
             var validator = Substitute.For<IValidator<UpdateCategoryCommand>>();
             validator.ValidateAsync(updateCommand, Arg.Any<CancellationToken>()).Returns(new ValidationResult(new List<ValidationFailure>()
             {
-                new ValidationFailure("StreetName", "StreetName is required")
+                new ValidationFailure("Name", "Name is required")
             }));
 
             // Mock the repository
@@ -60,7 +60,7 @@ namespace ECommerceApp.Application.Tests.Commands
             result.ValidationsErrors.Should().NotBeNullOrEmpty();
 
             // Assert
-            result.ValidationsErrors.Should().Contain(error => error.Contains("StreetName is required"));
+            result.ValidationsErrors.Should().Contain(error => error.Contains("Name is required"));
         }
     }
 }

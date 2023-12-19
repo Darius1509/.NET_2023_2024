@@ -1,4 +1,5 @@
 ﻿using ECommerceApp.Domain.Common;
+using System.Net;
 
 namespace ECommerceApp.Domain.Entities
 {
@@ -42,18 +43,30 @@ namespace ECommerceApp.Domain.Entities
 
         public void AttachAddress(Address address)
         {
+            if (address == null)
+            {
+                throw new ArgumentNullException(nameof(address), "Address cannot be null");
+            }
             if (CustomerAddresses == null) { CustomerAddresses = new List<Address>(); }
             CustomerAddresses.Add(address);
         }
 
         public void AttachProduct(Product product)
         {
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product), "Products cannot be null");
+            }
             if (CustomerWishlist == null) { CustomerWishlist = new List<Product>(); }
             CustomerWishlist.Add(product);
         }
 
         public void AttachOrder(Order order)
         {
+            if (order == null)
+            {
+                throw new ArgumentNullException(nameof(order), "Address cannot be null");
+            }
             if (CustomerOrders == null) { CustomerOrders = new List<Order>(); }
             CustomerOrders.Add(order);
         }

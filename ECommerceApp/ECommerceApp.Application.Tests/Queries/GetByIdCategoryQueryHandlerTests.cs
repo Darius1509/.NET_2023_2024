@@ -19,7 +19,7 @@ namespace ECommerceApp.Application.Tests.Queries
             var repository = Substitute.For<ICategoryRepository>();
 
             var existingCategory = Category.Create("Existing Category").Value;
-            existingCategory.GetType().GetProperty("Id").SetValue(existingCategory, categoryId); // Set the Id
+            existingCategory.GetType().GetProperty("CategoryId").SetValue(existingCategory, categoryId); // Set the Id
 
             repository.FindByIdAsync(categoryId).Returns(Task.FromResult(Result<Category>.Success(existingCategory)));
 
