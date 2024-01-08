@@ -1,0 +1,54 @@
+﻿@page "/addorder"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+@inject NavigationManager NavigationManager
+@inject IOrderDataService OrderDataService
+@inject ICategoryDataService CategoryDataService
+<h3>AddOrder</h3>
+
+<MudText Typo="Typo.h3">Add Order</MudText>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <MudAlert Severity="Severity.Info">@Message</MudAlert>
+}
+
+<MudForm Model="@orderViewModel" @ref="form">
+    <MudPaper Elevation="2" Class="p-4">
+        <MudTextField T="string" Label="Order Status:" @bind-Value="@orderViewModel.OrderStatus" FullWidth />
+        <MudDatePicker Label="Order Date:" @bind-value="@orderViewModel.Date" FullWidth />
+        <MudSelect T="Guid" Label="Customer:" @bind-Value="@orderViewModel.OrderCustomerId" FullWidth>
+        </MudSelect>
+        <MudButton OnClick="@HandleValidSubmit" ButtonType="ButtonType.Submit" Color="Color.Primary">Save Order</MudButton>
+        <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+    </MudPaper>
+</MudForm>
+
+@code {
+    public OrderViewModel orderViewModel { get; set; } = new OrderViewModel();
+    public string Message { get; set; }
+    private MudForm form;
+
+    private async Task HandleValidSubmit()
+    {
+        var result = await OrderDataService.CreateOrderAsync(orderViewModel);
+        if (result.IsSuccess)
+        {
+            Message = "Order created successfully";
+            NavigationManager.NavigateTo("/orderoverview");
+        }
+        else
+        {
+            Message = result.Message;
+            if (!string.IsNullOrWhiteSpace(result.ValidationErrors))
+            {
+                Message += result.ValidationErrors;
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/productoverview");
+    }
+}

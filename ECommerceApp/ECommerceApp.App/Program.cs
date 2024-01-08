@@ -43,6 +43,10 @@ builder.Services.AddHttpClient<IProductDataService, ProductDataService>(client =
 {
     client.BaseAddress = new Uri("https://localhost:7040/");
 });
+builder.Services.AddHttpClient<IOrderDataService, OrderDataService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7040/");
+});
 builder.Services.AddMudServices();
 
 await builder.Build().RunAsync();

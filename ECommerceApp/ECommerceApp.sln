@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.Domain.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.Application.Tests", "ECommerceApp.Application.Tests\ECommerceApp.Application.Tests.csproj", "{D0874889-9C0B-429C-8E93-748AAB4D283E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp.API.IntegrationTests", "ECommerceApp.API.IntegrationTests\ECommerceApp.API.IntegrationTests.csproj", "{427720D8-534A-4A69-A0D2-1F0D909F2673}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.API.IntegrationTests", "ECommerceApp.API.IntegrationTests\ECommerceApp.API.IntegrationTests.csproj", "{427720D8-534A-4A69-A0D2-1F0D909F2673}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

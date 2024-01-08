@@ -1,0 +1,47 @@
+﻿@page "/orderoverview"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.Services
+@using ECommerceApp.App.ViewModels
+@inject ITokenService TokenService
+@inject IOrderDataService OrderDataService
+@inject NavigationManager NavigationManager
+<h3>OrderOverview</h3>
+
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+    <h3>Orders</h3>
+    <br />
+
+    @if (Orders == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <MudGrid>
+            @foreach (var order in Orders)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;">
+                       <b>@order.OrderStatus</b>
+                       <div>@order.Date</div>
+                       <div>@order.OrderCustomerId</div>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+</MudContainer>
+
+@code {
+    public List<OrderViewModel> Orders { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await TokenService.GetTokenAsync();
+        if (token == null)
+		{
+			NavigationManager.NavigateTo("/login");
+		}
+        Orders = (await OrderDataService.GetOrdersAsync()).ToList();
+    }
+}
