@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -42,5 +43,6 @@ builder.Services.AddHttpClient<IProductDataService, ProductDataService>(client =
 {
     client.BaseAddress = new Uri("https://localhost:7040/");
 });
+builder.Services.AddMudServices();
 
 await builder.Build().RunAsync();

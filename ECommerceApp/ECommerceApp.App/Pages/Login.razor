@@ -4,35 +4,33 @@
 @inject NavigationManager navigationManager
 @inject CustomStateProvider authStateProvider
 
-<h1 class="h2 font-weight-normal login-title">
-    Login
-</h1>
+<MudContainer>
+    <MudGrid Justify="Justify.Center" Style="height: 100vh;">
+        <MudItem xs="12" sm="8" md="6" lg="4">
+            <MudPaper Elevation="2" Class="pa-4">
+                <MudText Typo="Typo.h3" GutterBottom>Login</MudText>
 
-<EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="loginRequest">
-    <DataAnnotationsValidator />
+                <MudForm Model="loginRequest" @ref="form" OnValidSubmit="OnSubmit">
+                    <MudTextField T="string" Label="Username" @bind-Value="loginRequest.Username" FullWidth />
+                     <MudTextField T="string" Label="Password" @bind-Value="loginRequest.Password" FullWidth InputType="InputType.Password" />
 
-    <label for="inputUsername" class="sr-only">Username</label>
-    <InputText id="inputUsername" class="form-control" @bind-Value="loginRequest.Username" autofocus placeholder="Username" />
-    <ValidationMessage For="@(() => loginRequest.Username)" />
+                     @if (!string.IsNullOrEmpty(error))
+                    {
+                        <MudText Color="Color.Error">@error</MudText>
+                    }
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <InputText type="password" id="inputPassword" class="form-control" placeholder="Password" @bind-Value="loginRequest.Password" />
-    <ValidationMessage For="@(() => loginRequest.Password)" />
-
-    <br />
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
-    <label class="text-danger">@error</label>
-
-    <NavLink href="register">
-        <h6 class="font-weight-normal text-center">Create account</h6>
-    </NavLink>
-</EditForm>
+                    <MudButton OnClick="OnSubmit" Color="Color.Primary" Style="margin-top: 20px;">Sign in</MudButton>
+                </MudForm>
+                <MudButton Href="register" Color="Color.Primary" Style="margin-top: 20px;">Create account</MudButton>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
 
 @code {
     LoginViewModel loginRequest { get; set; } = new LoginViewModel();
     string error { get; set; }
+    private MudForm form;
 
     async Task OnSubmit()
     {

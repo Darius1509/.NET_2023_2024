@@ -1,38 +1,24 @@
 ﻿@page "/addcategory"
 @using ECommerceApp.App.Contracts
 @using ECommerceApp.App.ViewModels
-<h3>Add Category</h3>
+@inject ICategoryDataService CategoryDataService
+@inject NavigationManager NavigationManager
 
-<EditForm Model="@CategoryViewModel" OnValidSubmit="@HandleValidSubmit">
+<MudText Typo="Typo.h3">Add Category</MudText>
 
-    <DataAnnotationsValidator />
-    <ValidationSummary></ValidationSummary>
+<MudForm Model="@CategoryViewModel" @ref="form">
+    <MudPaper Elevation="2" Class="p-4">
+        <MudTextField T="string" Label="Category name:" @bind-Value="@CategoryViewModel.Name" FullWidth />
 
-    <div class="row mb-3 ms-2">
-        <label for="categoryname" class="col-sm-3 form-label">Category name:</label>
-        <div class="col-sm-5">
-            <InputText id="categoryname" class="form-control" @bind-Value="@CategoryViewModel.Name" placeholder="Enter category name"></InputText>
-            <ValidationMessage For="@(() => CategoryViewModel.Name)" />
-        </div>
-    </div>
+         <MudButton OnClick="@HandleValidSubmit" Color="Color.Primary">Save category</MudButton>
+         <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+     </MudPaper>
+ </MudForm>
 
-    <button type="submit" class="btn btn-primary">Save category</button>
-    <button class="btn btn-primary" @onclick="Cancel">Cancel</button>
-</EditForm>
-
-@code {
-    [Inject]
-    public ICategoryDataService CategoryDataService { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
+ @code {
     public CategoryViewModel CategoryViewModel { get; set; } = new CategoryViewModel();
-
     public string Message { get; set; }
-}
-
-@functions {
+    private MudForm form;
     private async Task HandleValidSubmit()
     {
         var result = await CategoryDataService.CreateCategoryAsync(CategoryViewModel);

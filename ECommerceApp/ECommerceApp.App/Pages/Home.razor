@@ -1,34 +1,35 @@
 ﻿@page "/"
 @using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+@inject ICategoryDataService CategoryDataService
+@inject IProductDataService ProductDataService
+@inject NavigationManager NavigationManager
+@inject IAuthenticationService AuthenticationService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+@code {
+    private List<CategoryViewModel> Categories;
+    private List<ProductViewModel> Products;
+    private bool IsUserAuthenticated;
 
-Welcome to your new app.
-
-<br />
-<CascadingAuthenticationState>
-    <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
-        <Authorized>
-            <button class="btn btn-lg btn-primary btn-block" @onclick="Logout">Logout</button>
-        </Authorized>
-        <NotAuthorized>
-            <button class="btn btn-lg btn-primary btn-block" @onclick="NavigateToLogin">Click here to log in</button>
-      
-        </NotAuthorized>
-    </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
-</CascadingAuthenticationState>
-@functions {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-    [Inject]
-    public IAuthenticationService AuthenticationService { get; set; }
-
-    private void NavigateToLogin()
+    protected override async Task OnInitializedAsync()
     {
-        NavigationManager.NavigateTo("/login");
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            IsUserAuthenticated = true;
+            Categories = await CategoryDataService.GetCategoriesAsync();
+            Products = await ProductDataService.GetProductsAsync();
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/login");
+        }
     }
 
     private async Task Logout()
@@ -36,4 +37,36 @@ Welcome to your new app.
         await AuthenticationService.Logout();
         NavigationManager.NavigateTo("/login");
     }
+}
+
+@if (IsUserAuthenticated)
+{
+    <MudContainer>
+        <MudText Typo="Typo.h3">Categories</MudText>
+        <MudGrid>
+            @foreach (var category in Categories)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Elevation="2" Class="pa-4">
+                        <MudText>@category.Name</MudText>
+                        </MudPaper>
+                    </MudItem>
+            }
+        </MudGrid>
+
+        <MudText Typo="Typo.h3" Class="mt-5">Products</MudText>
+        <MudGrid>
+            @foreach (var product in Products)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Elevation="2" Class="pa-4">
+                        <MudText>@product.Name</MudText>
+                            <MudText>@product.Description</MudText>
+                        </MudPaper>
+                    </MudItem>
+            }
+        </MudGrid>
+
+        <MudButton OnClick="Logout" Color="Color.Primary">Logout</MudButton>
+    </MudContainer>
 }

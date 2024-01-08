@@ -2,60 +2,42 @@
 @using ECommerceApp.App.Contracts
 @using ECommerceApp.App.ViewModels
 @inject ITokenService TokenService
-<h3>ProductOverview</h3>
-<br />
+@inject IProductDataService ProductDataService
+@inject ICategoryDataService CategoryDataService
+@inject NavigationManager NavigationManager
 
-@if (Products == null)
-{
+
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+    <h3>Products</h3>
+    <br />
+
+    @if (Products == null)
+    {
         <p><em>Loading...</em></p>
-}
-else
-{
-        <table>
-            <thead>
-                <tr>
-                    <th>Product name</th>
-                </tr>
-            </thead>
-            <tbody>
+    }
+    else
+    {
+        <MudGrid>
             @foreach (var product in Products)
             {
-                        <tr>
-                            <td><b> @product.Name </b></td>
-                        </tr>
-                        <tr>
-                            <td>@product.Description </td
-                        </tr>
-                        <tr>
-                            <td> Quantity: @product.Quantity </td>
-                        </tr>
-                        <tr>
-                            <td> Price: @product.Price </td>
-                        </tr>
-                        <tr>
-                            <td> Category: @Categories.FirstOrDefault(c => c.Id == product.ProductCategoryId)?.Name </td>
-                        </tr>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;">
+                        <b>@product.Name</b>
+                        <div>@product.Description</div>
+                        <div>Category: @Categories.FirstOrDefault(c => c.Id == product.ProductCategoryId)?.Name</div>
+                        <div>Quantity: @product.Quantity</div>
+                        <div>Price: @product.Price</div>
+                    </MudPaper>
+                </MudItem>
             }
-            </tbody>
-        </table>
-}
+        </MudGrid>
+    }
+</MudContainer>
 
 @code {
-    [Inject]
-    public IProductDataService ProductDataService { get; set; }
-
-    [Inject]
-    public ICategoryDataService CategoryDataService { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     public List<ProductViewModel> Products { get; set; }
-
     public List<CategoryViewModel> Categories { get; set; }
-}
 
-@functions {
     protected override async Task OnInitializedAsync()
     {
         var token = await TokenService.GetTokenAsync();

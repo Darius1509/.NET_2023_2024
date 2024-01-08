@@ -45,5 +45,11 @@ namespace ECommerceApp.App.Auth
             await authService.Login(loginParameters);
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
+
+        public async Task Register(RegisterViewModel registerParameters)
+        {
+            await authService.Register(registerParameters);
+            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+        }
     }
 }

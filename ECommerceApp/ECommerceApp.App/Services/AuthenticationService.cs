@@ -27,6 +27,18 @@ namespace ECommerceApp.App.Services
             await tokenService.SetTokenAsync(token);
         }
 
+        public async Task Register(RegisterViewModel registerRequest)
+        {
+            var response = await httpClient.PostAsJsonAsync("api/v1/authentication/register", registerRequest);
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+            response.EnsureSuccessStatusCode();
+            var token = await response.Content.ReadAsStringAsync();
+            await tokenService.SetTokenAsync(token);
+        }
+
         public async Task Logout()
         {
             await tokenService.RemoveTokenAsync();

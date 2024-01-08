@@ -1,0 +1,58 @@
+﻿@page "/register"
+@using ECommerceApp.App.Auth
+@using ECommerceApp.App.ViewModels
+@inject NavigationManager NavigationManager
+@inject CustomStateProvider authStateProvider
+
+<MudContainer>
+    <MudGrid Justify="Justify.Center" Style="height: 100vh;">
+        <MudItem xs="12" sm="8" md="6" lg="4">
+            <MudPaper Elevation="2" Class="pa-4">
+                <MudText Typo="Typo.h3" GutterBottom>Register</MudText>
+
+                <MudForm Model="registerRequest" @ref="form" OnValidSubmit="OnSubmit">
+                    <MudTextField T="string" Label="First Name" @bind-Value="registerRequest.Name" FullWidth />
+                    <MudTextField T="string" Label="Username" @bind-Value="registerRequest.Username" FullWidth />
+                    <MudTextField T="string" Label="Email" @bind-Value="registerRequest.Email" FullWidth />
+                    <MudTextField T="string" Label="Password" @bind-Value="registerRequest.Password" FullWidth InputType="InputType.Password" />
+                    <MudTextField T="string" Label="Confirm Password" @bind-Value="confirmPassword" FullWidth InputType="InputType.Password" />
+
+                     @if (!string.IsNullOrEmpty(error))
+                    {
+                        <MudText Color="Color.Error">@error</MudText>
+                    }
+
+                    <MudButton OnClick="OnSubmit" Color="Color.Primary" Style="margin-top: 20px;">Register</MudButton>
+                </MudForm>
+                <MudLink Href="login" Color="Color.Primary" Style="margin-top: 20px;">Already have an account? Login</MudLink>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    RegisterViewModel registerRequest { get; set; } = new RegisterViewModel();
+    string confirmPassword { get; set; }
+    string error { get; set; }
+    private MudForm form;
+
+    async Task OnSubmit()
+    {
+        error = null;
+        if (registerRequest.Password != confirmPassword)
+        {
+            error = "Passwords do not match.";
+            return;
+        }
+
+        try
+        {
+            await authStateProvider.Register(registerRequest);
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+}

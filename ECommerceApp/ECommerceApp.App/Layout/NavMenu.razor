@@ -1,65 +1,20 @@
-﻿<div class="top-row ps-3 navbar navbar-dark" style="background-color: #015401; color: #ffffff;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="" style="color: #ffffff;">ECommerceApp</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon" style="color: #015401;"></span>
-        </button>
-    </div>
-</div>
+﻿@using MudBlazor
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu" style="background-color: #006400; color: #ffffff;">
-    <nav class="flex-column">
-        <Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>
-        <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
-            <Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All" style="color: #ffffff;">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true" style="color: #006400;"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="categoryoverview">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Categories
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="addcategory">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Add Category
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="addressoverview">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Addresses
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="addaddress">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Add Address
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="productoverview">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Products
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="addproduct">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Add Product
-            </NavLink>
-        </div>
-                </Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Authorized>
-            </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
-        </Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>
-    </nav>
-</div>
+<MudNavMenu>
+    <MudNavLink Icon="@Icons.Material.Filled.Home" Href="" Match="NavLinkMatch.All">Home</MudNavLink>
 
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
+    <CascadingAuthenticationState>
+        <AuthorizeView>
+            <Authorized>
+                <MudNavLink Icon="@Icons.Material.Filled.List" Href="categoryoverview">Categories</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.AddBox" Href="addcategory">Add Category</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.ListAlt" Href="addressoverview">Addresses</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.AddLocation" Href="addaddress">Add Address</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.ShoppingCart" Href="productoverview">Products</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.AddShoppingCart" Href="addproduct">Add Product</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
+</MudNavMenu>

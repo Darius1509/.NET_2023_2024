@@ -1,72 +1,47 @@
 ﻿@page "/addproduct"
 @using ECommerceApp.App.Contracts
 @using ECommerceApp.App.ViewModels
-<h3>Add Product</h3>
+@inject IProductDataService ProductDataService
+@inject ICategoryDataService CategoryDataService
+@inject NavigationManager NavigationManager
 
-<EditForm Model="@ProductViewModel" OnValidSubmit="@HandleValidSubmit">
+<MudText Typo="Typo.h3">Add Product</MudText>
 
-    <DataAnnotationsValidator />
-    <ValidationSummary></ValidationSummary>
-
-    <div class="row mb-3 ms-2">
-        <label for="productname" class="col-sm-3 form-label">Product Name: </label>
-        <div class="col-sm-5">
-            <InputText id="productname" class="form-control" @bind-Value="@ProductViewModel.Name" placeholder="Enter Product name"></InputText>
-            <ValidationMessage For="@(() => ProductViewModel.Name)" />
-        </div>
-        <label for="description" class="col-sm-3 form-label">Description: </label>
-        <div class="col-sm-5">
-            <InputText id="description" class="form-control" @bind-Value="@ProductViewModel.Description" placeholder="Enter description"></InputText>
-            <ValidationMessage For="@(() => ProductViewModel.Description)" />
-        </div>
-        <label for="quantity" class="col-sm-3 form-label">Quantity: </label>
-        <div class="col-sm-5">
-            <InputNumber id="quantity" class="form-control" @bind-Value="@ProductViewModel.Quantity" placeholder="Enter quantity"></InputNumber>
-            <ValidationMessage For="@(() => ProductViewModel.Quantity)" />
-        </div>
-        <label for="price" class="col-sm-3 form-label">Price: </label>
-        <div class="col-sm-5">
-            <InputNumber id="price" class="form-control" @bind-Value="@ProductViewModel.Price" placeholder="Enter price"></InputNumber>
-            <ValidationMessage For="@(() => ProductViewModel.Price)" />
-        </div>
-        <label for="category" class="col-sm-3 form-label">Category: </label>
-        <div class="col-sm-5">
-            <select id="category" class="form-control" @bind="@ProductViewModel.ProductCategoryId">
-                <option value="">Select Category</option>
-                @foreach (var category in Categories)
-                {
-                    <option value="@category.Id">@category.Name</option>
-                }
-            </select>
-            <ValidationMessage For="@(() => ProductViewModel.ProductCategoryId)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save Product</button>
-    <button class="btn btn-primary" @onclick="Cancel">Cancel</button>
-</EditForm>
-
-@code {
-    [Inject]
-    public IProductDataService ProductDataService { get; set; }
-
-    [Inject]
-    public ICategoryDataService CategoryDataService { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    public ProductViewModel ProductViewModel { get; set; } = new ProductViewModel();
-
-    public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
-
-    public string Message { get; set; }
+@if (!string.IsNullOrEmpty(Message))
+{
+    <MudAlert Severity="Severity.Info">@Message</MudAlert>
 }
 
-@functions {
+
+<MudForm Model="@productViewModel" @ref="form">
+    <MudPaper Elevation="2" Class="p-4">
+        <MudTextField T="string" Label="Product Name:" @bind-Value="@productViewModel.Name" FullWidth />
+         <MudTextField T="string" Label="Description:" @bind-Value="@productViewModel.Description" FullWidth multiline />
+         <MudTextField T="int" Label="Quantity:" @bind-Value="@productViewModel.Quantity" FullWidth />
+         <MudTextField T="int" Label="Price:" @bind-Value="@productViewModel.Price" FullWidth />
+
+         <MudSelect T="Guid" Label="Category:" @bind-Value="@productViewModel.ProductCategoryId" FullWidth>
+            <MudSelectItem Value="new Guid()" Disabled>Select Category</MudSelectItem>
+            @foreach (var category in Categories)
+            {
+                <MudSelectItem Value="@category.Id">@category.Name</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudButton OnClick="@HandleValidSubmit" ButtonType="ButtonType.Submit" Color="Color.Primary">Save Product</MudButton>
+        <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+    </MudPaper>
+</MudForm>
+
+@code {
+    public ProductViewModel productViewModel { get; set; } = new ProductViewModel();
+    public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+    public string Message { get; set; }
+    private MudForm form;
+
     private async Task HandleValidSubmit()
     {
-        var result = await ProductDataService.CreateProductAsync(ProductViewModel);
+        var result = await ProductDataService.CreateProductAsync(productViewModel);
         if (result.IsSuccess)
         {
             Message = "Product created successfully";
@@ -87,9 +62,8 @@
         NavigationManager.NavigateTo("/productoverview");
     }
 
-protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         Categories = await CategoryDataService.GetCategoriesAsync();
     }
-
 }

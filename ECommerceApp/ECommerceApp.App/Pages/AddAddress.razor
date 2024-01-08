@@ -1,57 +1,33 @@
 ﻿@page "/addaddress"
 @using ECommerceApp.App.Contracts
 @using ECommerceApp.App.ViewModels
-<h3>Add Address</h3>
+@inject IAddressDataService AddressDataService
+@inject NavigationManager NavigationManager
 
-<EditForm Model="@AddressViewModel" OnValidSubmit="@HandleValidSubmit">
+<MudText Typo="Typo.h3">Add Address</MudText>
 
-    <DataAnnotationsValidator />
-    <ValidationSummary></ValidationSummary>
-
-    <div class="row mb-3 ms-2">
-        <label for="streetname" class="col-sm-3 form-label">Street: </label>
-        <div class="col-sm-5">
-            <InputText id="streetname" class="form-control" @bind-Value="@AddressViewModel.StreetName" placeholder="Enter street name"></InputText>
-            <ValidationMessage For="@(() => AddressViewModel.StreetName)" />
-        </div>
-        <label for="postalcode" class="col-sm-3 form-label">Postal Code: </label>
-        <div class="col-sm-5">
-            <InputNumber id="postalcode" class="form-control" @bind-Value="@AddressViewModel.PostalCode" placeholder="Enter postal code"></InputNumber>
-            <ValidationMessage For="@(() => AddressViewModel.PostalCode)" />
-        </div>
-
-    </div>
-    <div class="row mb-3 ms-2">
-        <label for="city" class="col-sm-3 form-label">City: </label>
-        <div class="col-sm-5">
-            <InputText id="city" class="form-control" @bind-Value="@AddressViewModel.City" placeholder="Enter city"></InputText>
-            <ValidationMessage For="@(() => AddressViewModel.City)" />
-        </div>
-        <label for="country" class="col-sm-3 form-label">Country: </label>
-        <div class="col-sm-5">
-            <InputText id="country" class="form-control" @bind-Value="@AddressViewModel.Country" placeholder="Enter country"></InputText>
-            <ValidationMessage For="@(() => AddressViewModel.Country)" />
-        </div>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary">Save address</button>
-    <button class="btn btn-primary" @onclick="Cancel">Cancel</button>
-</EditForm>
-
-@code {
-    [Inject]
-    public IAddressDataService AddressDataService { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    public AddressViewModel AddressViewModel { get; set; } = new AddressViewModel();
-
-    public string Message { get; set; }
+@if (!string.IsNullOrEmpty(Message))
+{
+    <MudAlert Severity="Severity.Info">@Message</MudAlert>
 }
 
-@functions {
+<MudForm Model="@AddressViewModel" @ref="form">
+    <MudPaper Elevation="2" Class="p-4">
+        <MudTextField T="string" Label="Street:" @bind-Value="@AddressViewModel.StreetName" FullWidth />
+         <MudTextField T="int" Label="Postal Code:" @bind-Value="@AddressViewModel.PostalCode" FullWidth />
+         <MudTextField T="string" Label="City:" @bind-Value="@AddressViewModel.City" FullWidth />
+         <MudTextField T="string" Label="Country:" @bind-Value="@AddressViewModel.Country" FullWidth />
+
+         <MudButton OnClick="@HandleValidSubmit" ButtonType="ButtonType.Submit" Color="Color.Primary">Save Address</MudButton>
+         <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+     </MudPaper>
+ </MudForm>
+
+ @code {
+    public AddressViewModel AddressViewModel { get; set; } = new AddressViewModel();
+    public string Message { get; set; }
+    private MudForm form;
+
     private async Task HandleValidSubmit()
     {
         var result = await AddressDataService.CreateAddressAsync(AddressViewModel);
@@ -74,5 +50,4 @@
     {
         NavigationManager.NavigateTo("/addressoverview");
     }
-
 }

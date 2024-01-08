@@ -5,25 +5,33 @@
 @inject CustomStateProvider authStateProvider
 @inject ITokenService TokenService
 @inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="DrawerToggle" />
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="2">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h5" Class="mt-1">Application</MudText>
+        </MudDrawerHeader>
         <NavMenu />
-    </div>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
 
-    <main>
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+@code {
+    private bool _drawerOpen = true;
 
-@functions {
-    protected override async Task OnInitializedAsync()
+    private void DrawerToggle()
     {
-        var token = await TokenService.GetTokenAsync();
-        if (token == null)
-        {
-            navigationManager.NavigateTo("/login");
-        }
+        _drawerOpen = !_drawerOpen;
     }
 }
