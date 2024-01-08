@@ -35,29 +35,39 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
             result.Should().HaveCount(4);
         }
 
-
         [Fact]
         public async Task When_PostCategoryCommandHandlerIsCalledWithRightParameters_Then_TheEntityCreatedShouldBeReturned()
         {
             // Arrange
             string token = CreateToken();
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var category = new CreateCategoryCommand
+
+            var postCategoryCommand = new CreateCategoryCommand
             {
-                Name = "Test Category",
+                Name = "Test Category"
             };
 
             // Act
-            var response = await Client.PostAsJsonAsync(RequestUri, category);
+            var response = await Client.PostAsJsonAsync(RequestUri, postCategoryCommand);
+            response.EnsureSuccessStatusCode();
+
+            // Log the request content
+            var requestContent = await response.RequestMessage.Content.ReadAsStringAsync();
+
+            // Log the response content
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            // Deserialize the response
+
+            var result = JsonConvert.DeserializeObject<CreateCategoryCommandResponse>(responseContent);
 
             // Assert
-            response.EnsureSuccessStatusCode();
-            var responseString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<CategoryDto>(responseString);
-
             result.Should().NotBeNull();
-            result.Name.Should().Be(category.Name);
+            result.Category.Should().NotBeNull(); 
+            result.Category.Name.Should().Be("Test Category", because: $"Expected {nameof(result.Category.Name)} to be \"Test Category\", but found \"{result.Category.Name}\".");
+            
         }
+
 
         [Fact]
         public async Task When_PostCategoryCommandHandlerIsCalledWithMissingToken_Then_UnauthorizedResponseShouldBeReturned()
@@ -75,6 +85,7 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
+
 
         [Fact]
         public async Task When_PostCategoryCommandHandlerIsCalledWithInvalidToken_Then_UnauthorizedResponseShouldBeReturned()

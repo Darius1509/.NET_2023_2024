@@ -1,5 +1,4 @@
-﻿
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -7,9 +6,9 @@ using System.Security.Claims;
 using ECommerceApp.API.IntegrationTests.Base;
 using ECommerceApp.Application.Features.Addresses.Commands.CreateAddress;
 using ECommerceApp.Application.Features.Addresses.Queries;
+using ECommerceApp.Application.Features.Addresses.Queries.GetById;
 using FluentAssertions;
 using Newtonsoft.Json;
-using Xunit;
 
 namespace ECommerceApp.API.IntegrationTests.Controllers
 {
@@ -55,17 +54,25 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
             var response = await Client.PostAsJsonAsync(RequestUri, createAddressCommand);
             response.EnsureSuccessStatusCode();
 
-            var responseString = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<CreateAddressDto>(responseString);
-            Console.WriteLine(responseString);
+            // Log the request content
+            var requestContent = await response.RequestMessage.Content.ReadAsStringAsync();
+
+            // Log the response content
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            // Deserialize the response
+            var result = JsonConvert.DeserializeObject<CreateAddressCommandResponse>(responseContent);
 
             // Assert
-            result.Should().NotBeNull();
-            result.StreetName.Should().Be(createAddressCommand.StreetName);
-            result.PostalCode.Should().Be(createAddressCommand.PostalCode);
-            result.City.Should().Be(createAddressCommand.City);
-            result.Country.Should().Be(createAddressCommand.Country);
+            result.Should().NotBeNull();            
+            result.Address.Should().NotBeNull();
+            result.Address.StreetName.Should().Be(createAddressCommand.StreetName, because: $"Expected {nameof(result.Address.StreetName)} to be \"{createAddressCommand.StreetName}\", but found \"{result.Address.StreetName}\".");
+            result.Address.PostalCode.Should().Be(createAddressCommand.PostalCode);
+            result.Address.City.Should().Be(createAddressCommand.City);
+            result.Address.Country.Should().Be(createAddressCommand.Country);
+            
         }
+
 
         [Fact]
         public async Task When_CreateAddressCommandHandlerIsCalledWithInvalidParameters_Then_BadRequest()
@@ -122,6 +129,43 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
+
+        [Fact]
+        public async Task When_GetAddressByIdQueryHandlerIsCalledWithValidParameters_Then_Success()
+        {
+            // Arrange
+            string token = CreateToken();
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var createAddressCommand = new CreateAddressCommand
+            {
+                StreetName = "Test Street",
+                PostalCode = 12345,
+                City = "Test City",
+                Country = "Test Country"
+            };
+
+            var responseCreate = await Client.PostAsJsonAsync("/api/v1/addresses", createAddressCommand);
+            responseCreate.EnsureSuccessStatusCode();
+            var createdAddress = JsonConvert.DeserializeObject<CreateAddressCommandResponse>(await responseCreate.Content.ReadAsStringAsync());
+
+            // Act
+            var responseGet = await Client.GetAsync($"/api/v1/addresses/{createdAddress.Address.Id}");
+            responseGet.EnsureSuccessStatusCode();
+
+            // Deserialize the response
+            var result = JsonConvert.DeserializeObject<AddressDto>(await responseGet.Content.ReadAsStringAsync());
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Id.Should().Be(createdAddress.Address.Id, because: $"Expected {nameof(result.Id)} to be \"{createdAddress.Address.Id}\", but found \"{result.Id}\".");
+            result.StreetName.Should().Be(createAddressCommand.StreetName, because: $"Expected {nameof(result.StreetName)} to be \"{createAddressCommand.StreetName}\", but found \"{result.StreetName}\".");
+            result.PostalCode.Should().Be(createAddressCommand.PostalCode);
+            result.City.Should().Be(createAddressCommand.City);
+            result.Country.Should().Be(createAddressCommand.Country);
+        }
+
+
 
         [Fact]
         public async Task When_GetAllAddressesQueryHandlerIsCalledWithoutToken_Then_Unauthorized()
