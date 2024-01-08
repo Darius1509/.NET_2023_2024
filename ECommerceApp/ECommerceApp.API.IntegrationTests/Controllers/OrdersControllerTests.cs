@@ -18,7 +18,11 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
         [Fact]
         public async Task GetAllOrdersQueryHandler_Should_Return_Successful_Response()
         {
-            // Arrange && Act
+            // Arrange
+            string token = CreateToken();
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Act
             var response = await Client.GetAsync(RequestUri);
 
             // Assert
