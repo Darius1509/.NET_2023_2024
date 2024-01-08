@@ -11,8 +11,8 @@
 <PageTitle>Home</PageTitle>
 
 @code {
-    private List<CategoryViewModel> Categories;
-    private List<ProductViewModel> Products;
+    private List<CategoryViewModel> Categories = new List<CategoryViewModel>();
+    private List<ProductViewModel> Products = new List<ProductViewModel>();
     private bool IsUserAuthenticated;
 
     protected override async Task OnInitializedAsync()
@@ -70,3 +70,4 @@
         <MudButton OnClick="Logout" Color="Color.Primary">Logout</MudButton>
     </MudContainer>
 }
+

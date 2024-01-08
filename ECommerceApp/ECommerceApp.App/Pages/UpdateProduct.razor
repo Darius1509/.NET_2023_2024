@@ -1,49 +1,33 @@
 ﻿@page "/updateproduct/{id:guid}"
 @using ECommerceApp.App.Contracts
 @using ECommerceApp.App.ViewModels
-<h3>Update Product</h3>
 
-<EditForm Model="@ProductViewModel" OnValidSubmit="@HandleValidSubmit">
-<DataAnnotationsValidator />
-	<ValidationSummary></ValidationSummary>
-	<div class="row mb-3 ms-2">
-		<label for="name" class="col-sm-3 form-label">Name: </label>
-		<div class="col-sm-5">
-			<InputText id="name" class="form-control" @bind-Value="@ProductViewModel.Name" placeholder="Enter name"></InputText>
-			<ValidationMessage For="@(() => ProductViewModel.Name)" />
-		</div>
-		<label for="description" class="col-sm-3 form-label">Description: </label>
-		<div class="col-sm-5">
-			<InputText id="description" class="form-control" @bind-Value="@ProductViewModel.Description" placeholder="Enter description"></InputText>
-			<ValidationMessage For="@(() => ProductViewModel.Description)" />
-		</div>
-	</div>
-	<div class="row mb-3 ms-2">
-		<label for="price" class="col-sm-3 form-label">Price: </label>
-		<div class="col-sm-5">
-			<InputNumber id="price" class="form-control" @bind-Value="@ProductViewModel.Price" placeholder="Enter price"></InputNumber>
-			<ValidationMessage For="@(() => ProductViewModel.Price)" />
-		</div>
-        <label for="category" class="col-sm-3 form-label">Category: </label>
-        <div class="col-sm-5">
-            <select id="category" class="form-control" @bind="@ProductViewModel.ProductCategoryId">
-                <option value="">Select Category</option>
-                @foreach (var category in Categories)
-                {
-                    <option value="@category.Id">@category.Name</option>
-                }
-            </select>
-            <ValidationMessage For="@(() => ProductViewModel.ProductCategoryId)" />
-        </div>
-        <label for="quantity" class="col-sm-3 form-label">Quantity:</label>
-        <div>
-            <InputNumber id="quantity" class="form-control" @bind-Value="@ProductViewModel.Quantity" placeholder="Enter quantity"></InputNumber>
-			<ValidationMessage For="@(() => ProductViewModel.Quantity)" />
-        </div>
-	</div>
-	<button type="submit" class="btn btn-primary">Update product</button>
-	<button class="btn btn-primary" @onclick="Cancel">Cancel</button>
-</EditForm>
+<MudText Typo="Typo.h3">Update Product</MudText>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <MudAlert Severity="Severity.Info">@Message</MudAlert>
+}
+
+<MudForm Model="@ProductViewModel" @ref="form">
+    <MudPaper Elevation="2" Class="pa-4">
+        <MudTextField T="string" Label="Name:" @bind-Value="@ProductViewModel.Name" FullWidth />
+         <MudTextField T="string" Label="Description:" @bind-Value="@ProductViewModel.Description" FullWidth multiline />
+         <MudTextField T="int" Label="Price:" @bind-Value="@ProductViewModel.Price" FullWidth />
+         <MudTextField T="int" Label="Quantity:" @bind-Value="@ProductViewModel.Quantity" FullWidth />
+
+         <MudSelect T="Guid" Label="Category:" @bind-Value="@ProductViewModel.ProductCategoryId" FullWidth>
+            <MudSelectItem Value="new Guid()" Disabled>Select Category</MudSelectItem>
+            @foreach (var category in Categories)
+            {
+                <MudSelectItem Value="@category.Id">@category.Name</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudButton OnClick="HandleValidSubmit" Color="Color.Primary">Update Product</MudButton>
+        <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+    </MudPaper>
+</MudForm>
 
 @code {
     [Inject]
@@ -63,6 +47,8 @@
     public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
 
     public string Message { get; set; }
+
+    private MudForm form;
 
     protected override async Task OnInitializedAsync()
     {
