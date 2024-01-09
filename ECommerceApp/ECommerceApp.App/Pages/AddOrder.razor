@@ -17,7 +17,9 @@
     <MudPaper Elevation="2" Class="p-4">
         <MudTextField T="string" Label="Order Status:" @bind-Value="@orderViewModel.OrderStatus" FullWidth />
         <MudDatePicker Label="Order Date:" @bind-value="@orderViewModel.Date" FullWidth />
-        <MudSelect T="Guid" Label="Customer:" @bind-Value="@orderViewModel.OrderCustomerId" FullWidth>
+
+        <MudSelect T="Guid" Label="CustomerId:" @bind-Value="@orderViewModel.OrderCustomerId" FullWidth>
+                <MudSelectItem T="Guid" Value=UserGuid Label="darius.dinu"/>
         </MudSelect>
         <MudButton OnClick="@HandleValidSubmit" ButtonType="ButtonType.Submit" Color="Color.Primary">Save Order</MudButton>
         <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
@@ -28,6 +30,7 @@
     public OrderViewModel orderViewModel { get; set; } = new OrderViewModel();
     public string Message { get; set; }
     private MudForm form;
+    public Guid UserGuid = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6");
 
     private async Task HandleValidSubmit()
     {
@@ -49,6 +52,6 @@
 
     private void Cancel()
     {
-        NavigationManager.NavigateTo("/productoverview");
+        NavigationManager.NavigateTo("/orderoverview");
     }
 }
