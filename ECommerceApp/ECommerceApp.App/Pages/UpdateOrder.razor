@@ -1,0 +1,69 @@
+﻿@page "/updateorder/{id:guid}"
+@using ECommerceApp.App.Contracts
+@using ECommerceApp.App.ViewModels
+
+
+<MudText Typo="Typo.h3">Update Order</MudText>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <MudAlert Severity="Severity.Info">@Message</MudAlert>
+}
+
+<MudForm Model="@orderViewModel" @ref="form">
+    <MudPaper Elevation="2" Class="pa-4">
+        <MudTextField T="string" Label="Order Status:" @bind-Value="@orderViewModel.OrderStatus" FullWidth />
+        <MudDatePicker Label="Order Date:" @bind-value="@orderViewModel.Date" FullWidth />
+         <MudSelect T="Guid" Label="CustomerID:" @bind-Value="@orderViewModel.OrderCustomerId" FullWidth>
+
+        </MudSelect>
+
+         <MudButton OnClick="HandleValidSubmit" Color="Color.Primary">Update Order</MudButton>
+         <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+     </MudPaper>
+ </MudForm>
+
+@code {
+    [Inject]
+    public IOrderDataService OrderDataService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    public OrderViewModel orderViewModel { get; set; } = new OrderViewModel();
+
+    public string Message { get; set; }
+
+    private MudForm form;
+
+    protected override async Task OnInitializedAsync()
+    {
+        orderViewModel = await OrderDataService.GetOrderByIdAsync(Id);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var result = await OrderDataService.UpdateOrderAsync(orderViewModel);
+        if (result.IsSuccess)
+        {
+            Message = "Order updated successfully";
+            NavigationManager.NavigateTo("/orderoverview");
+        }
+        else
+        {
+            Message = result.Message;
+            if (!string.IsNullOrWhiteSpace(result.ValidationErrors))
+            {
+                Message += result.ValidationErrors;
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/orderoverview");
+    }
+}

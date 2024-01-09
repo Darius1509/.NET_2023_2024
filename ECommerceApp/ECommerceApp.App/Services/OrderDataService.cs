@@ -62,7 +62,13 @@ namespace ECommerceApp.App.Services
 
         public async Task<ApiResponse<OrderDto>> UpdateOrderAsync(OrderViewModel orderViewModel)
         {
-            throw new NotImplementedException();
+            httpClient.DefaultRequestHeaders.Authorization
+                = new AuthenticationHeaderValue("Bearer", await tokenService.GetTokenAsync());
+            var result = await httpClient.PutAsJsonAsync($"{RequestUri}/{orderViewModel.Id}", orderViewModel);
+            result.EnsureSuccessStatusCode();
+            var response = await result.Content.ReadFromJsonAsync<ApiResponse<OrderDto>>();
+            response!.IsSuccess = result.IsSuccessStatusCode;
+            return response!;
         }
     }
 }

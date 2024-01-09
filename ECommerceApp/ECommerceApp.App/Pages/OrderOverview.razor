@@ -25,6 +25,7 @@
                        <b>@order.OrderStatus</b>
                        <div>@order.Date</div>
                        <div>@order.OrderCustomerId</div>
+                       <MudLink Href="@($"/updateorder/{order.Id}")" Color="Color.Primary">Update</MudLink>
                     </MudPaper>
                 </MudItem>
             }
