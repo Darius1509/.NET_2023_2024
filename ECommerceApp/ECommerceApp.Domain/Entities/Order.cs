@@ -20,6 +20,29 @@ namespace ECommerceApp.Domain.Entities
 
         public static Result<Order> Create(DateTime orderDate, string orderStatus, Guid orderCustomerId)
         {
+            var validation = ValidateParameters(orderDate, orderCustomerId, orderStatus);
+            if (validation != null) { return validation; }
+
+            return Result<Order>.Success(new Order(orderDate, orderStatus, orderCustomerId));
+        }
+
+        public static Result<Order> Update(Guid orderId, DateTime orderDate, Guid orderCustomerId, string orderStatus)
+        {
+            if (orderId == Guid.Empty) { return Result<Order>.Failure("Order Id cannot be empty"); }
+
+            var validation = ValidateParameters(orderDate, orderCustomerId, orderStatus);
+            if (validation != null) { return validation; }
+
+            var order = new Order(orderDate, orderStatus, orderCustomerId)
+            {
+                OrderId = orderId
+            };
+
+            return Result<Order>.Success(order);
+        }
+
+        private static Result<Order>? ValidateParameters(DateTime orderDate, Guid orderCustomerId, string orderStatus)
+        {
             if (orderDate == DateTime.MinValue)
             {
                 return Result<Order>.Failure("Order date cannot be empty");
@@ -33,7 +56,7 @@ namespace ECommerceApp.Domain.Entities
                 return Result<Order>.Failure("Order customer cannot be null");
             }
 
-            return Result<Order>.Success(new Order(orderDate, orderStatus, orderCustomerId));
+            return null;
         }
 
         public void AttachProduct(Product product)

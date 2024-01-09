@@ -1,4 +1,6 @@
 ﻿using ECommerceApp.Application.Features.Orders.Commands.CreateOrder;
+using ECommerceApp.Application.Features.Orders.Commands.DeleteOrder;
+using ECommerceApp.Application.Features.Orders.Commands.UpdateOrder;
 using ECommerceApp.Application.Features.Orders.Queries.GetAllOrders;
 using ECommerceApp.Application.Features.Orders.Queries.GetByIdOrder;
 using Microsoft.AspNetCore.Authorization;
@@ -36,6 +38,32 @@ namespace ECommerceAppAPI.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var result = await Mediator.Send(new GetByIdOrderQuery(id));
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> Delete(DeleteOrderCommand deleteOrderCommand)
+        {
+            var result = await Mediator.Send(deleteOrderCommand);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        public async Task<IActionResult> Update(UpdateOrderCommand updateOrderCommand)
+        {
+            var result = await Mediator.Send(updateOrderCommand);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
             return Ok(result);
         }
     }
