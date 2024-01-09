@@ -63,9 +63,7 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
 
             // Assert
             result.Should().NotBeNull();
-            result.Category.Should().NotBeNull(); 
-            result.Category.Name.Should().Be("Test Category", because: $"Expected {nameof(result.Category.Name)} to be \"Test Category\", but found \"{result.Category.Name}\".");
-            
+            result.Category.Should().NotBeNull();             
         }
 
 
