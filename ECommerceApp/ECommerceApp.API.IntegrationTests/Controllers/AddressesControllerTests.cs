@@ -9,6 +9,7 @@ using ECommerceApp.Application.Features.Addresses.Queries;
 using ECommerceApp.Application.Features.Addresses.Queries.GetById;
 using FluentAssertions;
 using Newtonsoft.Json;
+using Xunit.Abstractions;
 
 namespace ECommerceApp.API.IntegrationTests.Controllers
 {
@@ -54,13 +55,7 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
             var response = await Client.PostAsJsonAsync(RequestUri, createAddressCommand);
             response.EnsureSuccessStatusCode();
 
-            // Log the request content
-            var requestContent = await response.RequestMessage.Content.ReadAsStringAsync();
-
-            // Log the response content
             var responseContent = await response.Content.ReadAsStringAsync();
-
-            // Deserialize the response
             var result = JsonConvert.DeserializeObject<CreateAddressCommandResponse>(responseContent);
 
             // Assert
@@ -81,7 +76,6 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
             string token = CreateToken();
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            // Invalid address with an empty StreetName
             var invalidCreateAddressCommand = new CreateAddressCommand
             {
                 StreetName = "",
@@ -152,8 +146,6 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
             // Act
             var responseGet = await Client.GetAsync($"/api/v1/addresses/{createdAddress.Address.Id}");
             responseGet.EnsureSuccessStatusCode();
-
-            // Deserialize the response
             var result = JsonConvert.DeserializeObject<AddressDto>(await responseGet.Content.ReadAsStringAsync());
 
             // Assert
