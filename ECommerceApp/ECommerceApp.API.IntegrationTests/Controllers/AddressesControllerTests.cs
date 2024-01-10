@@ -150,8 +150,8 @@ namespace ECommerceApp.API.IntegrationTests.Controllers
 
             // Assert
             result.Should().NotBeNull();
-            result.Id.Should().Be(createdAddress.Address.Id, because: $"Expected {nameof(result.Id)} to be \"{createdAddress.Address.Id}\", but found \"{result.Id}\".");
-            result.StreetName.Should().Be(createAddressCommand.StreetName, because: $"Expected {nameof(result.StreetName)} to be \"{createAddressCommand.StreetName}\", but found \"{result.StreetName}\".");
+            result.Id.Should().Be(createdAddress.Address.Id);
+            result.StreetName.Should().Be(createAddressCommand.StreetName);
             result.PostalCode.Should().Be(createAddressCommand.PostalCode);
             result.City.Should().Be(createAddressCommand.City);
             result.Country.Should().Be(createAddressCommand.Country);
