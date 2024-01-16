@@ -6,10 +6,8 @@ using System.Security.Claims;
 using ECommerceApp.API.IntegrationTests.Base;
 using ECommerceApp.Application.Features.Addresses.Commands.CreateAddress;
 using ECommerceApp.Application.Features.Addresses.Queries;
-using ECommerceApp.Application.Features.Addresses.Queries.GetById;
 using FluentAssertions;
 using Newtonsoft.Json;
-using Xunit.Abstractions;
 
 namespace ECommerceApp.API.IntegrationTests.Controllers
 {
