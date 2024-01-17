@@ -1,6 +1,5 @@
 ﻿using ECommerceApp.Application.Features.Categories.Commands.CreateCategory;
 using ECommerceApp.Application.Persistence;
-using ECommerceApp.Domain.Entities;
 using FluentAssertions;
 using NSubstitute;
 

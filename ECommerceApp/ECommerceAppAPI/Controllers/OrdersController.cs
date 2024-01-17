@@ -1,4 +1,5 @@
-﻿using ECommerceApp.Application.Features.Orders.Commands.CreateOrder;
+﻿using ECommerceApp.Application.Features.Orders.Commands.AddProductsToOrder;
+using ECommerceApp.Application.Features.Orders.Commands.CreateOrder;
 using ECommerceApp.Application.Features.Orders.Commands.DeleteOrder;
 using ECommerceApp.Application.Features.Orders.Commands.UpdateOrder;
 using ECommerceApp.Application.Features.Orders.Queries.GetAllOrders;
@@ -65,6 +66,31 @@ namespace ECommerceAppAPI.Controllers
                 return BadRequest(result);
             }
             return Ok(result);
+        }
+
+        [Authorize(Roles = "Admin, User")]
+        [HttpPost("{orderId}/attach-product")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> AttachProduct(Guid orderId, [FromBody] AddProductToOrderCommand attachProductCommand)
+        {
+            try
+            {
+                attachProductCommand.Id = orderId;
+                var result = await Mediator.Send(attachProductCommand);
+
+                if (!result.Success)
+                {
+                    return BadRequest(result);
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
     }
 }

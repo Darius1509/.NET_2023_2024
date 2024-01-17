@@ -7,7 +7,6 @@ using ECommerceApp.API.IntegrationTests.Base;
 using ECommerceApp.Application.Features.Categories.Commands.CreateCategory;
 using ECommerceApp.Application.Features.Categories.Queries;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Newtonsoft.Json;
 using Xunit.Abstractions;
 

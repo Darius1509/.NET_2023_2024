@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using ECommerceApp.Application.Features.Products.Queries;
+using MediatR;
 
 namespace ECommerceApp.Application.Features.Orders.Commands.AddProductsToOrder
 {
@@ -8,5 +9,7 @@ namespace ECommerceApp.Application.Features.Orders.Commands.AddProductsToOrder
         public DateTime Date { get; set; }
         public Guid OrderCustomerId { get; set; }
         public string OrderStatus { get; set; }
+
+        public List<ProductDto> Products { get; set; }
     }
 }

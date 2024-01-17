@@ -1,7 +1,6 @@
 ﻿
 
 using ECommerceApp.Application.Features.Addresses.Commands.CreateAddress;
-using ECommerceApp.Application.Features.Categories.Commands.CreateCategory;
 using ECommerceApp.Application.Persistence;
 using FluentAssertions;
 using NSubstitute;

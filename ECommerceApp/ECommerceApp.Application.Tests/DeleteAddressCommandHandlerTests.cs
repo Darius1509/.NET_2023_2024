@@ -1,7 +1,6 @@
 ﻿
 
 using ECommerceApp.Application.Features.Addresses.Commands.DeleteAddress;
-using ECommerceApp.Application.Features.Categories.Commands.DeleteCategory;
 using ECommerceApp.Application.Persistence;
 using ECommerceApp.Domain.Common;
 using ECommerceApp.Domain.Entities;

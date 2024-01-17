@@ -1,5 +1,4 @@
-﻿using ECommerceApp.Application.Features.Addresses.Queries.GetById;
-using ECommerceApp.Application.Features.Categories.Commands.CreateCategory;
+﻿using ECommerceApp.Application.Features.Categories.Commands.CreateCategory;
 using ECommerceApp.Application.Features.Categories.Commands.DeleteCategory;
 using ECommerceApp.Application.Features.Categories.Commands.UpdateCategory;
 using ECommerceApp.Application.Features.Categories.Queries.GetAllCategories;

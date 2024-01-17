@@ -6,53 +6,50 @@ namespace ECommerceApp.Application.Features.Orders.Commands.AddProductsToOrder
 {
     public class AddProductToOrderCommandHandler : IRequestHandler<AddProductToOrderCommand, AddProductToOrderResponse>
     {
-        private readonly IOrderRepository repository;
+        private readonly IOrderRepository _orderRepository;
 
-        public AddProductToOrderCommandHandler(IOrderRepository repository)
+        public AddProductToOrderCommandHandler(IOrderRepository orderRepository)
         {
-            this.repository = repository;
+            _orderRepository = orderRepository;
         }
 
         public async Task<AddProductToOrderResponse> Handle(AddProductToOrderCommand request, CancellationToken cancellationToken)
         {
-			//create a new order and assign a empty list of products to it
-            var response = new AddProductToOrderResponse();
-            var validator = new AddProductToOrderCommandValidator();
-            var validationResult = await validator.ValidateAsync(request);
-            if (validationResult.Errors.Count > 0)
+            try
             {
-                response.Success = false;
-                response.ValidationsErrors = new List<string>();
-                foreach (var error in validationResult.Errors)
+                var order = await _orderRepository.FindByIdAsync(request.Id);
+
+                if (order == null)
                 {
-                    response.ValidationsErrors.Add(error.ErrorMessage);
-                }
-            }
-            if (response.Success)
-            {
-                var order = Order.Create(request.Date, request.OrderStatus, request.OrderCustomerId);
-                if (order.IsSuccess)
-                {
-                    await repository.AddAsync(order.Value);
-                    response.Order = new AddProductToOrderDto
+                    return new AddProductToOrderResponse
                     {
-                        Id = order.Value.OrderId,
-                        Date = order.Value.OrderDate,
-                        OrderCustomerId = order.Value.OrderCustomerId,
-                        OrderStatus = order.Value.OrderStatus,
-                        Products = new List<Product>()
+                        Success = false,
+                        Message = $"Order with ID {request.Id} not found"
                     };
                 }
-                else
+
+               
+                
+                var orderObj = Order.Create(request.Date, request.OrderStatus, request.OrderCustomerId);
+                //orderObj.AttachOrder(product);
+
+                //_orderRepository.UpdateAsync(orderObj);
+
+                return new AddProductToOrderResponse
                 {
-                    response.Success = false;
-                    response.ValidationsErrors = new List<string>()
-                    {
-                        order.ErrorMessage
-                    };
-                }
+                    Success = true,
+                    Message = "Product attached to order successfully"
+                };
             }
-            return response;
+            catch (Exception ex)
+            {
+                // Handle exceptions accordingly
+                return new AddProductToOrderResponse
+                {
+                    Success = false,
+                    Message = $"Error attaching product to order: {ex.Message}"
+                };
+            }
         }
     }
 }

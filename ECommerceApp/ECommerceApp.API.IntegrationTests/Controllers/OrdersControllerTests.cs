@@ -8,7 +8,6 @@ using System.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Net;
-using Xunit.Abstractions;
 
 namespace ECommerceApp.API.IntegrationTests.Controllers
 {

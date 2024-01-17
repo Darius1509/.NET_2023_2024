@@ -1,5 +1,4 @@
 ﻿using ECommerceApp.Domain.Common;
-using System.Net;
 
 namespace ECommerceApp.Domain.Entities
 {

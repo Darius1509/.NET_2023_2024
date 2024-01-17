@@ -1,10 +1,6 @@
 ﻿using ECommerceApp.Application.Features.Categories.Queries.GetAllCategories;
 using ECommerceApp.Application.Persistence;
-using ECommerceApp.Domain.Common;
-using ECommerceApp.Domain.Entities;
 using FluentAssertions;
-using NSubstitute;
-using System;
 
 namespace ECommerceApp.Application.Tests.Queries
 {
